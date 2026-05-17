@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dateien & Dateisysteme</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Outfit:wght@700;800;900&display=swap');
+
+:root {
+  --bg: #080b0f;
+  --surface: #0e1117;
+  --surface2: #141820;
+  --surface3: #1a2028;
+  --border: #1e2535;
+  --border2: #28314a;
+  --accent: #3b82f6;
+  --accent2: #f59e0b;
+  --accent3: #10b981;
+  --accent4: #8b5cf6;
+  --accent5: #ef4444;
+  --text: #e2e8f4;
+  --text-dim: #8090a8;
+  --text-faint: #3d4f6a;
+  --code-bg: #060810;
+  --green: #10b981;
+  --red: #ef4444;
+  --yellow: #f59e0b;
+  --purple: #8b5cf6;
+  --blue: #3b82f6;
+  --cyan: #06b6d4;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.app { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 255px; min-width: 255px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; bottom: 0;
+  overflow-y: auto; z-index: 50;
+}
+.sidebar-logo {
+  padding: 1.4rem 1.2rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+.logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem; font-weight: 900;
+  letter-spacing: -0.02em; color: var(--text);
+}
+.logo-text span { color: var(--cyan); }
+.logo-sub {
+  font-size: 0.68rem; color: var(--text-faint);
+  letter-spacing: 0.09em; text-transform: uppercase;
+  margin-top: 0.2rem; font-family: 'DM Mono', monospace;
+}
+.sidebar-progress {
+  padding: 0.7rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+.progress-label {
+  font-size: 0.68rem; color: var(--text-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 0.35rem;
+  display: flex; justify-content: space-between;
+}
+.progress-bar { height: 2px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--accent3));
+  border-radius: 2px; transition: width 0.6s ease; width: 0%;
+}
+.sidebar-nav { padding: 0.9rem 0; flex: 1; }
+.nav-module { margin-bottom: 0.2rem; }
+.nav-module-header {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.68rem; font-family: 'DM Mono', monospace;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-faint); cursor: pointer;
+  user-select: none; transition: color 0.2s;
+}
+.nav-module-header:hover { color: var(--text-dim); }
+.module-num {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 3px; padding: 0.08rem 0.35rem; font-size: 0.62rem;
+}
+.module-check { margin-left: auto; color: var(--green); font-size: 0.75rem; display: none; }
+.nav-items { padding: 0 0.65rem; }
+.nav-item {
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.4rem 0.7rem; border-radius: 5px;
+  cursor: pointer; font-size: 0.8rem; color: var(--text-dim);
+  transition: all 0.15s; border: 1px solid transparent;
+  margin-bottom: 0.08rem;
+}
+.nav-item:hover { background: var(--surface2); color: var(--text); border-color: var(--border); }
+.nav-item.active { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); color: var(--cyan); }
+.item-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--border2); flex-shrink: 0; transition: background 0.2s;
+}
+.nav-item.active .item-dot { background: var(--cyan); }
+.nav-item.done .item-dot { background: var(--green); }
+.item-score { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--green); }
+
+/* MAIN */
+.main {
+  margin-left: 255px; flex: 1; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+}
+.topbar {
+  padding: 1.1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(8,11,15,0.92);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 40; width: 100%;
+}
+.topbar-breadcrumb {
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  color: var(--text-faint); display: flex; align-items: center; gap: 0.45rem;
+}
+.topbar-breadcrumb .sep { color: var(--border2); }
+.topbar-breadcrumb .current { color: var(--text-dim); }
+.topbar-nav { margin-left: auto; display: flex; gap: 0.45rem; }
+.btn-nav {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  padding: 0.38rem 0.85rem; border-radius: 5px;
+  border: 1px solid var(--border2); background: var(--surface2);
+  color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+}
+.btn-nav:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-nav.primary { background: var(--cyan); border-color: var(--cyan); color: #000; font-weight: 500; }
+.btn-nav.primary:hover { background: #22d3ee; }
+
+/* PAGE */
+.page {
+  display: none; padding: 2.8rem 4rem;
+  max-width: 900px; width: 100%;
+  animation: fadeUp 0.3s ease;
+}
+.page.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TYPOGRAPHY */
+.chapter-tag {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-family: 'DM Mono', monospace; font-size: 0.66rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.22rem 0.65rem; border-radius: 4px; margin-bottom: 0.9rem;
+}
+.tag-bit   { background: rgba(6,182,212,0.1); color: var(--cyan); border: 1px solid rgba(6,182,212,0.2); }
+.tag-file  { background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.tag-text  { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+.tag-bin   { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.2); }
+.tag-fmt   { background: rgba(139,92,246,0.1); color: var(--purple); border: 1px solid rgba(139,92,246,0.2); }
+.tag-perm  { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.tag-mime  { background: rgba(6,182,212,0.1); color: var(--cyan); border: 1px solid rgba(6,182,212,0.2); }
+.tag-quiz  { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.2); }
+
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 900; letter-spacing: -0.03em;
+  line-height: 1.1; margin-bottom: 0.7rem; color: var(--text);
+}
+h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: -0.02em; margin: 2.2rem 0 0.7rem; color: var(--text);
+}
+h3 { font-size: 0.95rem; font-weight: 600; margin: 1.4rem 0 0.45rem; color: var(--text); }
+p { color: var(--text-dim); margin-bottom: 0.8rem; font-size: 0.93rem; line-height: 1.7; }
+p strong { color: var(--text); font-weight: 600; }
+.lead {
+  font-size: 1rem; color: var(--text-dim); line-height: 1.75;
+  margin-bottom: 1.8rem; border-left: 3px solid var(--cyan); padding-left: 1.2rem;
+}
+
+/* CARDS */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 1.35rem; margin: 1.1rem 0;
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.9rem; margin: 1.1rem 0;
+}
+.card-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 1.15rem; position: relative;
+  overflow: hidden; transition: border-color 0.2s;
+}
+.card-item:hover { border-color: var(--border2); }
+.card-item::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+}
+.card-item.cyan::before { background: var(--cyan); }
+.card-item.blue::before { background: var(--blue); }
+.card-item.green::before { background: var(--green); }
+.card-item.yellow::before { background: var(--yellow); }
+.card-item.red::before { background: var(--red); }
+.card-item.purple::before { background: var(--purple); }
+.card-label {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.card-item.cyan .card-label { color: var(--cyan); }
+.card-item.blue .card-label { color: var(--blue); }
+.card-item.green .card-label { color: var(--green); }
+.card-item.yellow .card-label { color: var(--yellow); }
+.card-item.red .card-label { color: var(--red); }
+.card-item.purple .card-label { color: var(--purple); }
+.card-item h4 {
+  font-family: 'Outfit', sans-serif; font-size: 0.95rem;
+  font-weight: 700; margin-bottom: 0.45rem; color: var(--text);
+}
+.card-item p { font-size: 0.8rem; margin: 0; color: var(--text-dim); }
+
+/* INFO BOX */
+.info-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 7px; padding: 1.1rem 1.35rem;
+  margin: 1.1rem 0; border-left-width: 3px;
+}
+.info-box.cyan { border-left-color: var(--cyan); }
+.info-box.blue { border-left-color: var(--blue); }
+.info-box.green { border-left-color: var(--green); }
+.info-box.yellow { border-left-color: var(--yellow); }
+.info-box.red { border-left-color: var(--red); }
+.info-box.purple { border-left-color: var(--purple); }
+.box-label {
+  font-family: 'DM Mono', monospace; font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.45rem; font-weight: 500;
+}
+.info-box.cyan .box-label { color: var(--cyan); }
+.info-box.blue .box-label { color: var(--blue); }
+.info-box.green .box-label { color: var(--green); }
+.info-box.yellow .box-label { color: var(--yellow); }
+.info-box.red .box-label { color: var(--red); }
+.info-box.purple .box-label { color: var(--purple); }
+.info-box p { margin: 0; font-size: 0.85rem; }
+
+/* CODE */
+.code-block {
+  background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 7px; padding: 1.8rem 1.35rem 1.1rem;
+  margin: 0.9rem 0; font-family: 'DM Mono', monospace;
+  font-size: 0.8rem; line-height: 1.8;
+  overflow-x: auto; position: relative; white-space: pre;
+}
+.code-lang {
+  position: absolute; top: 0.45rem; right: 0.7rem;
+  font-size: 0.62rem; color: var(--text-faint);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.kw  { color: #818cf8; }
+.fn  { color: var(--cyan); }
+.str { color: var(--yellow); }
+.cm  { color: #3d4f6a; font-style: italic; }
+.num { color: var(--green); }
+.hex { color: var(--yellow); }
+.bit0 { color: #2a3a50; }
+.bit1 { color: var(--cyan); }
+.asc { color: var(--green); }
+
+/* TABLE */
+.data-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.82rem; margin: 1.1rem 0;
+}
+.data-table th {
+  text-align: left; padding: 0.55rem 0.9rem;
+  background: var(--surface2); border: 1px solid var(--border2);
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim);
+}
+.data-table td {
+  padding: 0.55rem 0.9rem; border: 1px solid var(--border);
+  color: var(--text-dim); font-size: 0.82rem;
+}
+.data-table tr:hover td { background: var(--surface2); }
+
+/* COMPARE */
+.compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 1.1rem 0; }
+.compare-col {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 1.15rem;
+}
+.col-header {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.9rem; padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border);
+}
+.compare-col.good .col-header { color: var(--green); }
+.compare-col.bad  .col-header { color: var(--red); }
+.compare-col ul { list-style: none; }
+.compare-col li {
+  font-size: 0.82rem; color: var(--text-dim);
+  padding: 0.28rem 0; padding-left: 1.1rem; position: relative;
+}
+.compare-col li::before {
+  content: ''; position: absolute; left: 0; top: 0.62rem;
+  width: 5px; height: 5px; border-radius: 50%;
+}
+.compare-col.good li::before { background: var(--green); }
+.compare-col.bad  li::before { background: var(--red); }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 2.2rem 0; }
+
+/* QUIZ */
+.quiz-container { margin-top: 0.9rem; }
+.quiz-question {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 1.35rem; margin-bottom: 1.35rem;
+}
+.question-num {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  color: var(--text-faint); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.7rem;
+}
+.question-text {
+  font-size: 0.92rem; color: var(--text); font-weight: 500;
+  margin-bottom: 0.9rem; line-height: 1.55;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 0.45rem; }
+.quiz-option {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  padding: 0.7rem 0.9rem; border-radius: 6px;
+  border: 1px solid var(--border2); background: var(--surface2);
+  cursor: pointer; transition: all 0.15s;
+  font-size: 0.85rem; color: var(--text-dim); text-align: left; width: 100%;
+}
+.quiz-option:hover:not(:disabled) { border-color: var(--cyan); color: var(--text); }
+.quiz-option.selected { border-color: var(--cyan); background: rgba(6,182,212,0.07); color: var(--text); }
+.quiz-option.correct  { border-color: var(--green); background: rgba(16,185,129,0.08); color: var(--green); }
+.quiz-option.wrong    { border-color: var(--red); background: rgba(239,68,68,0.08); color: var(--red); }
+.quiz-option:disabled { cursor: default; }
+.option-letter {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  background: var(--border2); border-radius: 3px;
+  padding: 0.08rem 0.4rem; flex-shrink: 0; margin-top: 0.05rem;
+}
+.quiz-option.correct .option-letter { background: var(--green); color: #000; }
+.quiz-option.wrong   .option-letter { background: var(--red); color: #fff; }
+.quiz-feedback {
+  margin-top: 0.7rem; padding: 0.8rem 0.9rem;
+  border-radius: 6px; font-size: 0.8rem; line-height: 1.6; display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct-fb { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); color: #6ee7b7; }
+.quiz-feedback.wrong-fb   { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: #fca5a5; }
+.feedback-title { font-weight: 600; margin-bottom: 0.25rem; }
+
+.quiz-result {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 9px; padding: 1.8rem; text-align: center;
+  margin-top: 1.35rem; display: none;
+}
+.quiz-result.show { display: block; }
+.result-score {
+  font-family: 'Outfit', sans-serif; font-size: 2.8rem;
+  font-weight: 900; color: var(--cyan); letter-spacing: -0.04em;
+}
+.result-label {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  color: var(--text-faint); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.9rem;
+}
+.result-msg { font-size: 0.87rem; color: var(--text-dim); margin-bottom: 1.1rem; }
+.reset-btn {
+  font-family: 'DM Mono', monospace; font-size: 0.75rem;
+  padding: 0.5rem 1.1rem; border-radius: 5px;
+  border: 1px solid var(--border2); background: var(--surface);
+  color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+}
+.reset-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* INTERACTIVE TOOLS */
+.tool-box {
+  background: var(--code-bg); border: 1px solid var(--border2);
+  border-radius: 9px; padding: 1.5rem; margin: 1.35rem 0;
+}
+.tool-label {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.tool-input-row {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; flex-wrap: wrap;
+}
+.tool-input {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 0.55rem 0.9rem;
+  color: var(--text); font-family: 'DM Mono', monospace;
+  font-size: 0.85rem; outline: none; transition: border-color 0.2s;
+  flex: 1; min-width: 0;
+}
+.tool-input:focus { border-color: var(--cyan); }
+.tool-counter {
+  font-family: 'DM Mono', monospace; font-size: 0.75rem;
+  color: var(--text-faint); white-space: nowrap; flex-shrink: 0;
+}
+.tool-counter.warn { color: var(--yellow); }
+.tool-counter.full { color: var(--red); }
+
+/* BYTE VISUALIZER */
+.bits-display {
+  display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.9rem;
+  max-height: 240px; overflow-y: auto;
+}
+.byte-group { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.byte-bits { display: flex; gap: 2px; }
+.bit-cell {
+  width: 18px; height: 25px; border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700;
+  transition: all 0.1s;
+}
+.bit-cell.zero { background: #101520; color: #243040; }
+.bit-cell.one  { background: rgba(6,182,212,0.18); color: var(--cyan); }
+.byte-char { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--green); }
+.byte-hex  { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--yellow); }
+
+/* NUMBER CONVERTER */
+.conv-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem; margin-top: 0.9rem;
+}
+.conv-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 0.9rem; text-align: center;
+}
+.conv-box-label {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  color: var(--text-faint); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.conv-value {
+  font-family: 'DM Mono', monospace; font-size: 1.15rem;
+  font-weight: 500; word-break: break-all;
+}
+.conv-box.dec .conv-value { color: var(--cyan); }
+.conv-box.bin .conv-value { color: var(--green); font-size: 0.85rem; }
+.conv-box.hex .conv-value { color: var(--yellow); }
+
+/* HEX VIEWER */
+.hex-grid {
+  display: flex; flex-wrap: wrap; gap: 4px; margin: 0.9rem 0;
+}
+.hex-byte {
+  position: relative; padding: 5px 4px; text-align: center;
+  border-radius: 4px; background: var(--surface2);
+  border: 1px solid var(--border); cursor: default;
+  min-width: 52px;
+  transition: all 0.15s;
+}
+.hex-byte:hover { border-color: var(--cyan); background: rgba(6,182,212,0.08); z-index: 10; }
+.hex-top { color: var(--yellow); display: block; font-family: 'DM Mono', monospace; font-size: 11px; }
+.hex-btm { color: var(--text-faint); display: block; font-family: 'DM Mono', monospace; font-size: 9px; margin-top: 2px; }
+.hex-tooltip {
+  display: none; position: absolute; bottom: calc(100% + 6px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface3); border: 1px solid var(--cyan);
+  border-radius: 6px; padding: 0.5rem 0.75rem;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  color: var(--text); white-space: nowrap; z-index: 100;
+  pointer-events: none; min-width: 140px; text-align: left;
+}
+.hex-tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--cyan);
+}
+.hex-byte:hover .hex-tooltip { display: block; }
+
+/* CRLF VISUALIZER */
+.crlf-display {
+  font-family: 'DM Mono', monospace; font-size: 0.8rem;
+  line-height: 1.9; margin-top: 0.9rem;
+}
+.crlf-row { margin-bottom: 0.35rem; }
+.crlf-char { display: inline-block; padding: 1px 4px; border-radius: 3px; }
+.crlf-normal { color: var(--text); }
+.crlf-cr { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.crlf-lf { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+.crlf-legend { display: flex; gap: 1rem; margin-top: 0.7rem; flex-wrap: wrap; }
+.crlf-legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-dim); }
+
+/* MAGIC BYTES RATER */
+.rater-box { margin: 1.1rem 0; }
+.rater-question {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 1.2rem; margin-bottom: 0.9rem;
+}
+.rater-bytes {
+  font-family: 'DM Mono', monospace; font-size: 1.1rem;
+  color: var(--yellow); letter-spacing: 0.15em; margin-bottom: 0.7rem;
+}
+.rater-opts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.rater-opt {
+  font-family: 'DM Mono', monospace; font-size: 0.8rem;
+  padding: 0.4rem 0.9rem; border-radius: 5px;
+  border: 1px solid var(--border2); background: var(--surface);
+  color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+}
+.rater-opt:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }
+.rater-opt.correct { border-color: var(--green); color: var(--green); background: rgba(16,185,129,0.08); }
+.rater-opt.wrong   { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.08); }
+.rater-opt:disabled { cursor: default; }
+
+/* PERMISSIONS */
+.perm-display {
+  font-family: 'DM Mono', monospace; font-size: 1.3rem;
+  letter-spacing: 0.1em; margin: 0.9rem 0; color: var(--text);
+}
+.perm-r { color: var(--cyan); }
+.perm-w { color: var(--yellow); }
+.perm-x { color: var(--green); }
+.perm-dash { color: var(--text-faint); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .sidebar { width: 100%; min-width: unset; position: relative; height: auto; }
+  .app { flex-direction: column; }
+  .main { margin-left: 0; align-items: stretch; }
+  .page { padding: 1.4rem 1.1rem; max-width: 100%; }
+  .compare-row { grid-template-columns: 1fr; }
+  .topbar { padding: 0.9rem 1.1rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .conv-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">Dateien<span>.</span>learn</div>
+    <div class="logo-sub">Azubi Lernplattform</div>
+  </div>
+  <div class="sidebar-progress">
+    <div class="progress-label"><span>Fortschritt</span><span id="progress-pct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+  <nav class="sidebar-nav">
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">01</span> Bits &amp; Bytes</div>
+      <div class="nav-items">
+        <div class="nav-item active" onclick="showPage('m1-grundlagen')"><span class="item-dot"></span> Grundlagen</div>
+        <div class="nav-item" onclick="showPage('m1-zahlensysteme')"><span class="item-dot"></span> Zahlensysteme</div>
+        <div class="nav-item" onclick="showPage('m1-quiz')"><span class="item-dot"></span> Quiz 1<span class="item-score" id="score-m1"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">02</span> Was ist eine Datei?</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m2-datei')"><span class="item-dot"></span> Dateien &amp; Metadaten</div>
+        <div class="nav-item" onclick="showPage('m2-dateisysteme')"><span class="item-dot"></span> Dateisysteme</div>
+        <div class="nav-item" onclick="showPage('m2-quiz')"><span class="item-dot"></span> Quiz 2<span class="item-score" id="score-m2"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">03</span> Textdateien</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m3-kodierung')"><span class="item-dot"></span> ASCII &amp; UTF-8</div>
+        <div class="nav-item" onclick="showPage('m3-zeilenenden')"><span class="item-dot"></span> CR, LF &amp; CRLF</div>
+        <div class="nav-item" onclick="showPage('m3-quiz')"><span class="item-dot"></span> Quiz 3<span class="item-score" id="score-m3"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">04</span> Bin&auml;rdateien</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m4-binaer')"><span class="item-dot"></span> Aufbau &amp; Magic Bytes</div>
+        <div class="nav-item" onclick="showPage('m4-hex')"><span class="item-dot"></span> &#9654; Hex-Viewer &amp; Rater</div>
+        <div class="nav-item" onclick="showPage('m4-quiz')"><span class="item-dot"></span> Quiz 4<span class="item-score" id="score-m4"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">05</span> Dateiformate</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m5-formate')"><span class="item-dot"></span> Formate nach Kategorie</div>
+        <div class="nav-item" onclick="showPage('m5-komprimierung')"><span class="item-dot"></span> Komprimierung</div>
+        <div class="nav-item" onclick="showPage('m5-quiz')"><span class="item-dot"></span> Quiz 5<span class="item-score" id="score-m5"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">06</span> Berechtigungen</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m6-linux')"><span class="item-dot"></span> Linux rwx</div>
+        <div class="nav-item" onclick="showPage('m6-windows')"><span class="item-dot"></span> Windows ACL</div>
+        <div class="nav-item" onclick="showPage('m6-quiz')"><span class="item-dot"></span> Quiz 6<span class="item-score" id="score-m6"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">07</span> MIME &amp; Base64</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('m7-mime')"><span class="item-dot"></span> MIME-Types</div>
+        <div class="nav-item" onclick="showPage('m7-base64')"><span class="item-dot"></span> Base64</div>
+        <div class="nav-item" onclick="showPage('m7-quiz')"><span class="item-dot"></span> Quiz 7<span class="item-score" id="score-m7"></span></div>
+      </div>
+    </div>
+
+    <div class="nav-module">
+      <div class="nav-module-header"><span class="module-num">&#9733;</span> Abschluss</div>
+      <div class="nav-items">
+        <div class="nav-item" onclick="showPage('final-quiz')"><span class="item-dot"></span> Gesamtquiz<span class="item-score" id="score-final"></span></div>
+      </div>
+    </div>
+
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-breadcrumb">
+      <span>Dateien.learn</span>
+      <span class="sep">/</span>
+      <span class="current" id="breadcrumb">Modul 1 &middot; Grundlagen</span>
+    </div>
+    <div class="topbar-nav">
+      <button class="btn-nav" onclick="prevPage()">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="nextPage()">Weiter &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 1: GRUNDLAGEN ══ -->
+  <div class="page active" id="page-m1-grundlagen">
+    <span class="chapter-tag tag-bit">Modul 01 &middot; Bits &amp; Bytes</span>
+    <h1>Bits &amp; Bytes</h1>
+    <p class="lead">Alles was ein Computer speichert, verarbeitet oder &uuml;bertr&auml;gt, besteht auf dem untersten Level aus zwei Zust&auml;nden: Spannung an oder aus. Das sind 1 und 0. Darauf baut alles auf.</p>
+
+    <h2>Das Bit</h2>
+    <p>Ein <strong>Bit</strong> (Binary Digit = bin&auml;re Stelle) ist die kleinste m&ouml;gliche Informationseinheit. Es kann genau zwei Zust&auml;nde annehmen: <strong>1</strong> oder <strong>0</strong>. An oder aus. Wahr oder falsch.</p>
+    <p>Ein einzelnes Bit ist f&uuml;r sich wenig n&uuml;tzlich. Erst durch Kombination mehrerer Bits entstehen aussagekr&auml;ftige Werte.</p>
+
+    <div class="card-grid">
+      <div class="card-item cyan">
+        <div class="card-label">Bit</div>
+        <h4>1 oder 0</h4>
+        <p>Kleinste Einheit. Kommt von "binary digit". Ein Bit kann nur zwei verschiedene Werte haben.</p>
+      </div>
+      <div class="card-item blue">
+        <div class="card-label">Nibble</div>
+        <h4>4 Bits</h4>
+        <p>Halb so gro&szlig; wie ein Byte. Kann Werte von 0 bis 15 darstellen. Entspricht genau einer Hex-Stelle.</p>
+      </div>
+      <div class="card-item green">
+        <div class="card-label">Byte</div>
+        <h4>8 Bits</h4>
+        <p>Die grundlegende Speichereinheit. Kann 2<sup>8</sup> = 256 verschiedene Werte annehmen (0 bis 255).</p>
+      </div>
+      <div class="card-item yellow">
+        <div class="card-label">Kilobyte (KB)</div>
+        <h4>1.024 Byte</h4>
+        <p>Im bin&auml;ren System: 2<sup>10</sup> = 1.024 Byte. Im Dezimalsystem (Festplattenhersteller): 1.000 Byte.</p>
+      </div>
+    </div>
+
+    <div class="info-box cyan">
+      <div class="box-label">Warum 8 Bits pro Byte?</div>
+      <p>Das ist historisch gewachsen. Fr&uuml;he Computer nutzten 6 oder 7 Bits. IBM setzte 1964 mit dem System/360 den Standard auf 8 Bits, weil das reicht um alle druckbaren Zeichen plus Steuerzeichen darzustellen und gut durch 2 teilbar ist.</p>
+    </div>
+
+    <h2>Was kann ein Byte darstellen?</h2>
+    <p>Mit 8 Bits sind genau 256 Kombinationen m&ouml;glich (2 hoch 8). Das reicht f&uuml;r:</p>
+
+    <div class="code-block"><span class="code-lang">Beispiel</span><span class="bit1">0</span><span class="bit1">1</span><span class="bit0">0</span><span class="bit1">0</span><span class="bit0">0</span><span class="bit1">1</span><span class="bit0">0</span><span class="bit1">1</span>  =  <span class="hex">0x65</span>  =  <span class="asc">'e'</span>  =  Dezimal 101
+
+<span class="cm">0x bedeutet: diese Zahl ist hexadezimal (Basis 16) angegeben.</span>
+<span class="cm">0x65 ist nicht "null x 65", sondern das Pr&auml;fix f&uuml;r eine Hex-Zahl.</span>
+<span class="cm">6 * 16 + 5 = 101 -- das ist derselbe Wert wie Dezimal 101.</span></div>
+
+    <div class="info-box yellow">
+      <div class="box-label">0x erkl&auml;rt</div>
+      <p><code style="font-family:'DM Mono',monospace">0x</code> ist ein Pr&auml;fix das anzeigt: "die folgende Zahl ist hexadezimal". <code style="font-family:'DM Mono',monospace">0x65</code> bedeutet also: Hex-Zahl 65. Das entspricht Dezimal 101. Genauso zeigt <code style="font-family:'DM Mono',monospace">0b</code> eine Bin&auml;rzahl an: <code style="font-family:'DM Mono',monospace">0b01000101</code> = dieselbe 101.</p>
+    </div>
+
+    <h2>Gr&ouml;&szlig;eneinheiten</h2>
+    <table class="data-table">
+      <thead><tr><th>Einheit</th><th>Abk.</th><th>Bin&auml;r</th><th>Dezimal</th><th>Beispiel</th></tr></thead>
+      <tbody>
+        <tr><td>Kilobyte</td><td>KB</td><td>1.024 Byte</td><td>1.000 Byte</td><td>Kurze Textdatei</td></tr>
+        <tr><td>Megabyte</td><td>MB</td><td>1.048.576 Byte</td><td>1.000.000 Byte</td><td>MP3-Song (~4 MB)</td></tr>
+        <tr><td>Gigabyte</td><td>GB</td><td>1.073.741.824 Byte</td><td>1.000.000.000 Byte</td><td>Film (~1&ndash;4 GB)</td></tr>
+        <tr><td>Terabyte</td><td>TB</td><td>~1,1 Billionen Byte</td><td>1.000.000.000.000 Byte</td><td>Festplatte</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box blue">
+      <div class="box-label">Bin&auml;r vs. Dezimal &ndash; der Unterschied</div>
+      <p>Festplattenhersteller werben mit Dezimal-GB (1 GB = 1.000.000.000 Byte). Windows zeigt aber bin&auml;re GiB (Gibibyte: 1 GiB = 1.073.741.824 Byte). Eine "1 TB"-Festplatte zeigt Windows deshalb als ~931 GB an. Das ist kein Fehler, nur zwei verschiedene Definitionen.</p>
+    </div>
+
+    <h2>Interaktiv: Text zu Bits</h2>
+    <div class="tool-box">
+      <div class="tool-label">&#9654; Byte-Visualizer</div>
+      <div class="tool-input-row">
+        <input type="text" class="tool-input" id="byte-input" maxlength="64"
+               placeholder="Text eingeben..." oninput="updateByteViz()"
+               value="Hi!">
+        <span class="tool-counter" id="byte-counter">3 / 64</span>
+      </div>
+      <div class="bits-display" id="bits-display"></div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-faint)" id="byte-summary"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav primary" onclick="showPage('m1-zahlensysteme')">Weiter: Zahlensysteme &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 1: ZAHLENSYSTEME ══ -->
+  <div class="page" id="page-m1-zahlensysteme">
+    <span class="chapter-tag tag-bit">Modul 01 &middot; Bits &amp; Bytes</span>
+    <h1>Zahlensysteme</h1>
+    <p class="lead">Computer rechnen bin&auml;r, Menschen rechnen dezimal, und Entwickler lesen Hex. Alle drei Systeme beschreiben dieselben Werte &ndash; nur mit unterschiedlichen Symbolen.</p>
+
+    <h2>Drei Systeme, ein Wert</h2>
+    <div class="card-grid">
+      <div class="card-item cyan">
+        <div class="card-label">Dezimal (Basis 10)</div>
+        <h4>0&ndash;9</h4>
+        <p>Das System das Menschen seit Jahrtausenden nutzen. 10 Symbole, weil wir 10 Finger haben. Stellenwert: 1, 10, 100, 1000...</p>
+      </div>
+      <div class="card-item green">
+        <div class="card-label">Bin&auml;r (Basis 2)</div>
+        <h4>0 und 1</h4>
+        <p>Das System der Computer. Nur 2 Symbole, weil Hardware nur zwei Zust&auml;nde kennt. Stellenwert: 1, 2, 4, 8, 16...</p>
+      </div>
+      <div class="card-item yellow">
+        <div class="card-label">Hexadezimal (Basis 16)</div>
+        <h4>0&ndash;9 und A&ndash;F</h4>
+        <p>16 Symbole. A=10, B=11, ... F=15. Sehr kompakt: 2 Hex-Stellen = 1 Byte. Deshalb &uuml;berall in der IT.</p>
+      </div>
+    </div>
+
+    <div class="code-block"><span class="code-lang">Beispiel: Wert 255</span>Dezimal:      <span class="num">255</span>
+Bin&auml;r:        <span class="bit1">1111</span><span class="bit1">1111</span>          <span class="cm">-- 8 Bits, alle auf 1</span>
+Hexadezimal:  <span class="hex">0xFF</span>              <span class="cm">-- F=15, also 15*16 + 15 = 255</span>
+
+Dezimal:      <span class="num">65</span>
+Bin&auml;r:        <span class="bit0">0</span><span class="bit1">1</span><span class="bit0">0</span><span class="bit0">0</span><span class="bit0">0</span><span class="bit1">0</span><span class="bit1">0</span><span class="bit1">1</span>      <span class="cm">-- 64+1 = 65</span>
+Hexadezimal:  <span class="hex">0x41</span>              <span class="cm">-- 4*16 + 1 = 65 = 'A' in ASCII</span></div>
+
+    <h2>Wie liest man Bin&auml;r?</h2>
+    <p>Jede Stelle hat einen Stellenwert der sich verdoppelt: von rechts nach links 1, 2, 4, 8, 16, 32, 64, 128. Du addierst die Werte der Stellen die eine 1 haben.</p>
+    <div class="code-block"><span class="code-lang">Beispiel: 0b10110010</span>Stelle:  128  64  32  16   8   4   2   1
+Bit:       <span class="bit1">1</span>   <span class="bit0">0</span>   <span class="bit1">1</span>   <span class="bit1">1</span>   <span class="bit0">0</span>   <span class="bit0">0</span>   <span class="bit1">1</span>   <span class="bit0">0</span>
+Wert:    128 +  0 + 32 + 16 +  0 +  0 +  2 +  0  =  <span class="num">178</span></div>
+
+    <h2>Wie liest man Hexadezimal?</h2>
+    <p>Jede Hex-Stelle entspricht genau 4 Bits (einem Nibble). Das macht Hex so praktisch: ein Byte = 2 Hex-Stellen, immer.</p>
+    <div class="code-block"><span class="code-lang">Hex lesen</span><span class="hex">0xB2</span>  =  B * 16 + 2  =  11 * 16 + 2  =  176 + 2  =  <span class="num">178</span>
+
+<span class="cm">-- Schnelle Umrechnung: jede Hex-Stelle = 4 Bits</span>
+<span class="hex">B</span> = <span class="num">11</span> = <span class="bit1">1011</span>
+<span class="hex">2</span> = <span class="num">2</span>  = <span class="bit0">0010</span>
+<span class="hex">B2</span> = <span class="bit1">1011</span><span class="bit0">0010</span> = 0b10110010 = <span class="num">178</span></div>
+
+    <h2>Interaktiv: Zahlensystem-Konverter</h2>
+    <div class="tool-box">
+      <div class="tool-label">&#9654; Konverter &ndash; gib eine Dezimalzahl ein (0&ndash;255)</div>
+      <div class="tool-input-row">
+        <input type="number" class="tool-input" id="conv-input"
+               min="0" max="255" value="65" oninput="updateConverter()" style="max-width:140px">
+        <span style="font-size:0.8rem;color:var(--text-faint);font-family:'DM Mono',monospace">0 &ndash; 255</span>
+      </div>
+      <div class="conv-grid">
+        <div class="conv-box dec">
+          <div class="conv-box-label">Dezimal</div>
+          <div class="conv-value" id="conv-dec">65</div>
+        </div>
+        <div class="conv-box bin">
+          <div class="conv-box-label">Bin&auml;r</div>
+          <div class="conv-value" id="conv-bin">01000001</div>
+        </div>
+        <div class="conv-box hex">
+          <div class="conv-box-label">Hexadezimal</div>
+          <div class="conv-value" id="conv-hex">0x41</div>
+        </div>
+      </div>
+      <div style="margin-top:0.7rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-faint)" id="conv-char"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m1-grundlagen')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m1-quiz')">Weiter: Quiz 1 &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 1: QUIZ ══ -->
+  <div class="page" id="page-m1-quiz">
+    <span class="chapter-tag tag-quiz">Modul 01 &middot; Quiz</span>
+    <h1>Quiz 1: Bits &amp; Bytes</h1>
+    <p class="lead">6 Fragen. Lies jede genau.</p>
+    <div class="quiz-container" id="quiz-m1">
+
+      <div class="quiz-question" data-q="0">
+        <div class="question-num">Frage 1 von 6</div>
+        <div class="question-text">Wie viele verschiedene Werte kann ein einzelnes Byte darstellen?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',0,'A')"><span class="option-letter">A</span> 8</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',0,'B')"><span class="option-letter">B</span> 128</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',0,'C')"><span class="option-letter">C</span> 256</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',0,'D')"><span class="option-letter">D</span> 1024</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-0"></div>
+      </div>
+
+      <div class="quiz-question" data-q="1">
+        <div class="question-num">Frage 2 von 6</div>
+        <div class="question-text">Was bedeutet das Pr&auml;fix <code style="font-family:'DM Mono',monospace">0x</code> vor einer Zahl?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',1,'A')"><span class="option-letter">A</span> Die Zahl ist negativ</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',1,'B')"><span class="option-letter">B</span> Die Zahl ist bin&auml;r</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',1,'C')"><span class="option-letter">C</span> Die Zahl ist hexadezimal</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',1,'D')"><span class="option-letter">D</span> Die Zahl hat keine Einheit</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-1"></div>
+      </div>
+
+      <div class="quiz-question" data-q="2">
+        <div class="question-num">Frage 3 von 6</div>
+        <div class="question-text">Wie viele Bits hat ein Nibble?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',2,'A')"><span class="option-letter">A</span> 2</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',2,'B')"><span class="option-letter">B</span> 4</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',2,'C')"><span class="option-letter">C</span> 8</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',2,'D')"><span class="option-letter">D</span> 16</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-2"></div>
+      </div>
+
+      <div class="quiz-question" data-q="3">
+        <div class="question-num">Frage 4 von 6</div>
+        <div class="question-text">Was ist der Dezimalwert von <code style="font-family:'DM Mono',monospace">0xFF</code>?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'A')"><span class="option-letter">A</span> 15</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'B')"><span class="option-letter">C</span> 240</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'C')"><span class="option-letter">C</span> 255</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'D')"><span class="option-letter">D</span> 256</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-3"></div>
+      </div>
+
+      <div class="quiz-question" data-q="4">
+        <div class="question-num">Frage 5 von 6</div>
+        <div class="question-text">Eine Festplatte wird mit "1 TB" beworben, Windows zeigt aber nur ~931 GB an. Was ist die Ursache?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'A')"><span class="option-letter">A</span> Die Festplatte ist defekt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'B')"><span class="option-letter">B</span> Hersteller nutzen Dezimal (1 TB = 10<sup>12</sup> Byte), Windows zeigt bin&auml;re GiB (1 GiB = 2<sup>30</sup> Byte)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'C')"><span class="option-letter">C</span> Windows rechnet falsch</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'D')"><span class="option-letter">D</span> Der Rest ist f&uuml;r das Dateisystem reserviert</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-4"></div>
+      </div>
+
+      <div class="quiz-question" data-q="5">
+        <div class="question-num">Frage 6 von 6</div>
+        <div class="question-text">Wie viele Hex-Stellen braucht man um ein Byte darzustellen?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m1',5,'A')"><span class="option-letter">A</span> 1</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',5,'B')"><span class="option-letter">B</span> 2</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',5,'C')"><span class="option-letter">C</span> 4</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',5,'D')"><span class="option-letter">D</span> 8</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m1-5"></div>
+      </div>
+
+      <div class="quiz-result" id="result-m1">
+        <div class="result-score" id="result-score-m1"></div>
+        <div class="result-label">Punkte erreicht</div>
+        <div class="result-msg" id="result-msg-m1"></div>
+        <button class="reset-btn" onclick="resetQuiz('m1')">Quiz zur&uuml;cksetzen</button>
+        <button class="btn-nav primary" style="margin-left:0.65rem" onclick="showPage('m2-datei')">Weiter zu Modul 2 &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATZHALTER Module 2-7 + Final -->
+  <div class="page" id="page-m2-datei"><span class="chapter-tag tag-file">Modul 02</span><h1>Dateien &amp; Metadaten</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m2-dateisysteme"><span class="chapter-tag tag-file">Modul 02</span><h1>Dateisysteme</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m2-quiz"><span class="chapter-tag tag-quiz">Quiz 2</span><h1>Quiz 2</h1><p class="lead">Folgt wenn Modul 2 fertig ist.</p></div>
+  <div class="page" id="page-m3-kodierung"><span class="chapter-tag tag-text">Modul 03</span><h1>ASCII &amp; UTF-8</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m3-zeilenenden"><span class="chapter-tag tag-text">Modul 03</span><h1>CR, LF &amp; CRLF</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m3-quiz"><span class="chapter-tag tag-quiz">Quiz 3</span><h1>Quiz 3</h1><p class="lead">Folgt wenn Modul 3 fertig ist.</p></div>
+  <div class="page" id="page-m4-binaer"><span class="chapter-tag tag-bin">Modul 04</span><h1>Bin&auml;rdateien &amp; Magic Bytes</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m4-hex"><span class="chapter-tag tag-bin">Modul 04</span><h1>Hex-Viewer &amp; Rater</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m4-quiz"><span class="chapter-tag tag-quiz">Quiz 4</span><h1>Quiz 4</h1><p class="lead">Folgt wenn Modul 4 fertig ist.</p></div>
+  <div class="page" id="page-m5-formate"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Dateiformate</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m5-komprimierung"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Komprimierung</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m5-quiz"><span class="chapter-tag tag-quiz">Quiz 5</span><h1>Quiz 5</h1><p class="lead">Folgt wenn Modul 5 fertig ist.</p></div>
+  <div class="page" id="page-m6-linux"><span class="chapter-tag tag-perm">Modul 06</span><h1>Linux Berechtigungen</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m6-windows"><span class="chapter-tag tag-perm">Modul 06</span><h1>Windows ACL</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m6-quiz"><span class="chapter-tag tag-quiz">Quiz 6</span><h1>Quiz 6</h1><p class="lead">Folgt wenn Modul 6 fertig ist.</p></div>
+  <div class="page" id="page-m7-mime"><span class="chapter-tag tag-mime">Modul 07</span><h1>MIME-Types</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m7-base64"><span class="chapter-tag tag-mime">Modul 07</span><h1>Base64</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
+  <div class="page" id="page-m7-quiz"><span class="chapter-tag tag-quiz">Quiz 7</span><h1>Quiz 7</h1><p class="lead">Folgt wenn Modul 7 fertig ist.</p></div>
+  <div class="page" id="page-final-quiz"><span class="chapter-tag tag-quiz">Abschluss</span><h1>Gesamtquiz</h1><p class="lead">Folgt wenn alle Module fertig sind.</p></div>
+
+</main>
+</div>
+
+<script>
+const PAGE_ORDER = [
+  'm1-grundlagen','m1-zahlensysteme','m1-quiz',
+  'm2-datei','m2-dateisysteme','m2-quiz',
+  'm3-kodierung','m3-zeilenenden','m3-quiz',
+  'm4-binaer','m4-hex','m4-quiz',
+  'm5-formate','m5-komprimierung','m5-quiz',
+  'm6-linux','m6-windows','m6-quiz',
+  'm7-mime','m7-base64','m7-quiz',
+  'final-quiz'
+];
+
+const BREADCRUMBS = {
+  'm1-grundlagen': 'Modul 1 · Grundlagen',
+  'm1-zahlensysteme': 'Modul 1 · Zahlensysteme',
+  'm1-quiz': 'Modul 1 · Quiz',
+  'm2-datei': 'Modul 2 · Dateien & Metadaten',
+  'm2-dateisysteme': 'Modul 2 · Dateisysteme',
+  'm2-quiz': 'Modul 2 · Quiz',
+  'm3-kodierung': 'Modul 3 · ASCII & UTF-8',
+  'm3-zeilenenden': 'Modul 3 · CR, LF & CRLF',
+  'm3-quiz': 'Modul 3 · Quiz',
+  'm4-binaer': 'Modul 4 · Binärdateien',
+  'm4-hex': 'Modul 4 · Hex-Viewer & Rater',
+  'm4-quiz': 'Modul 4 · Quiz',
+  'm5-formate': 'Modul 5 · Dateiformate',
+  'm5-komprimierung': 'Modul 5 · Komprimierung',
+  'm5-quiz': 'Modul 5 · Quiz',
+  'm6-linux': 'Modul 6 · Linux Berechtigungen',
+  'm6-windows': 'Modul 6 · Windows ACL',
+  'm6-quiz': 'Modul 6 · Quiz',
+  'm7-mime': 'Modul 7 · MIME-Types',
+  'm7-base64': 'Modul 7 · Base64',
+  'm7-quiz': 'Modul 7 · Quiz',
+  'final-quiz': 'Gesamtquiz'
+};
+
+let currentPage = 'm1-grundlagen';
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) n.classList.add('active');
+  });
+  document.getElementById('breadcrumb').textContent = BREADCRUMBS[id] || id;
+  currentPage = id;
+  window.scrollTo(0, 0);
+}
+
+function nextPage() {
+  const idx = PAGE_ORDER.indexOf(currentPage);
+  if (idx < PAGE_ORDER.length - 1) showPage(PAGE_ORDER[idx + 1]);
+}
+function prevPage() {
+  const idx = PAGE_ORDER.indexOf(currentPage);
+  if (idx > 0) showPage(PAGE_ORDER[idx - 1]);
+}
+
+// QUIZ
+const QUIZ_DATA = {
+  m1: {
+    correct: ['C','C','B','C','B','B'],
+    feedback: [
+      { correct: 'Richtig. Ein Byte besteht aus 8 Bits. 2 hoch 8 = 256 mögliche Kombinationen, also Werte von 0 bis 255.',
+        wrong: 'Falsch. Ein Byte hat 8 Bits, nicht 8 Werte. 2 hoch 8 = 256 mögliche Werte (0 bis 255). 8 Bits wäre die Anzahl der Stellen, nicht der möglichen Werte.' },
+      { correct: 'Richtig. 0x ist ein Präfix für hexadezimale Zahlen. 0xFF bedeutet: Hex-Zahl FF = 15*16+15 = 255. Analog zeigt 0b eine Binärzahl an.',
+        wrong: 'Falsch. 0x steht für hexadezimal, nicht binär (das wäre 0b) und nicht negativ. Es ist einfach eine Kennzeichnung des Zahlensystems.' },
+      { correct: 'Richtig. Ein Nibble sind genau 4 Bits, also die Hälfte eines Bytes. Das ist praktisch weil 4 Bits genau einer Hex-Stelle entsprechen.',
+        wrong: 'Falsch. Ein Nibble sind 4 Bits. 2 Bits wären zu wenig, 8 Bits wäre ein Byte, 16 Bits wären zwei Bytes.' },
+      { correct: 'Richtig. 0xFF: F=15, also 15*16 + 15 = 240 + 15 = 255. Das ist der größte Wert eines Bytes und entspricht dem Binärwert 11111111.',
+        wrong: 'Falsch. 0xFF = F*16 + F = 15*16 + 15 = 255. Nicht 15 (das wäre 0x0F), nicht 240 (das wäre 0xF0) und nicht 256 (Bytes gehen nur bis 255).' },
+      { correct: 'Richtig. Hersteller definieren 1 TB als 10 hoch 12 Byte (dezimal). Windows zeigt binäre Gibibyte: 1 GiB = 2 hoch 30 Byte. Diese unterschiedlichen Definitionen ergeben den scheinbaren Unterschied.',
+        wrong: 'Falsch. Die Festplatte ist nicht defekt und Windows rechnet nicht falsch. Es sind zwei verschiedene Definitionen desselben Begriffs. Ein kleiner Teil ist auch für das Dateisystem reserviert, aber das erklärt nicht die ganze Differenz.' },
+      { correct: 'Richtig. Ein Byte hat 8 Bits, eine Hex-Stelle entspricht 4 Bits. Also 8 / 4 = 2 Hex-Stellen pro Byte. Deshalb schreibt man Bytes immer als zweistellige Hex-Zahlen, z.B. 0x41 oder 0xFF.',
+        wrong: 'Falsch. 1 Hex-Stelle = 4 Bits = halbes Byte. Ein Byte braucht 2 Hex-Stellen. 4 Hex-Stellen wären 16 Bits = 2 Bytes. 8 Hex-Stellen wären 4 Bytes.' }
+    ]
+  }
+};
+
+const quizState = {};
+
+function selectOpt(btn, quizId, qIdx, letter) {
+  const q = btn.closest('.quiz-question');
+  const opts = q.querySelectorAll('.quiz-option');
+  opts.forEach(o => { o.classList.remove('selected'); o.disabled = true; });
+  btn.classList.add('selected');
+
+  if (!quizState[quizId]) quizState[quizId] = { answers: {}, score: 0 };
+  const data = QUIZ_DATA[quizId];
+  const correct = data.correct[qIdx];
+  const fb = document.getElementById('fb-' + quizId + '-' + qIdx);
+
+  if (letter === correct) {
+    btn.classList.add('correct');
+    quizState[quizId].answers[qIdx] = true;
+    fb.className = 'quiz-feedback correct-fb show';
+    fb.innerHTML = '<div class="feedback-title">Richtig ✓</div>' + data.feedback[qIdx].correct;
+  } else {
+    btn.classList.add('wrong');
+    quizState[quizId].answers[qIdx] = false;
+    opts.forEach(o => { const ol = o.querySelector('.option-letter').textContent.trim(); if (ol === correct) o.classList.add('correct'); });
+    fb.className = 'quiz-feedback wrong-fb show';
+    fb.innerHTML = '<div class="feedback-title">Falsch ✗</div>' + data.feedback[qIdx].wrong;
+  }
+
+  const totalQ = document.querySelectorAll('#quiz-' + quizId + ' .quiz-question').length;
+  if (Object.keys(quizState[quizId].answers).length === totalQ) showQuizResult(quizId, totalQ);
+}
+
+function showQuizResult(quizId, total) {
+  const state = quizState[quizId];
+  const score = Object.values(state.answers).filter(Boolean).length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('result-score-' + quizId).textContent = score + ' / ' + total;
+  let msg = pct >= 85 ? 'Sehr gut! Stoff verstanden.' : pct >= 60 ? 'Nicht schlecht. Schau dir die falschen Fragen nochmal an.' : 'Noch Nachholbedarf. Lies das Modul nochmal durch.';
+  document.getElementById('result-msg-' + quizId).textContent = msg;
+  document.getElementById('result-' + quizId).classList.add('show');
+  const scoreEl = document.getElementById('score-' + quizId);
+  if (scoreEl) scoreEl.textContent = score + '/' + total;
+  updateProgress();
+}
+
+function resetQuiz(quizId) {
+  delete quizState[quizId];
+  const container = document.getElementById('quiz-' + quizId);
+  container.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('selected','correct','wrong'); o.disabled = false; });
+  container.querySelectorAll('.quiz-feedback').forEach(f => { f.className = 'quiz-feedback'; f.innerHTML = ''; });
+  document.getElementById('result-' + quizId).classList.remove('show');
+  const scoreEl = document.getElementById('score-' + quizId);
+  if (scoreEl) scoreEl.textContent = '';
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = 7;
+  const done = Object.keys(quizState).length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+
+// BYTE VISUALIZER
+function updateByteViz() {
+  const input = document.getElementById('byte-input');
+  const val = input.value.substring(0, 64);
+  const counter = document.getElementById('byte-counter');
+  const display = document.getElementById('bits-display');
+  const summary = document.getElementById('byte-summary');
+
+  counter.textContent = val.length + ' / 64';
+  counter.className = 'tool-counter' + (val.length > 56 ? ' warn' : '') + (val.length === 64 ? ' full' : '');
+
+  display.innerHTML = '';
+  let totalBytes = 0;
+
+  for (const char of val) {
+    const cp = char.codePointAt(0);
+    let bytes = [];
+    if (cp < 0x80) bytes = [cp];
+    else if (cp < 0x800) bytes = [0xC0|(cp>>6), 0x80|(cp&0x3F)];
+    else if (cp < 0x10000) bytes = [0xE0|(cp>>12), 0x80|((cp>>6)&0x3F), 0x80|(cp&0x3F)];
+    else bytes = [0xF0|(cp>>18), 0x80|((cp>>12)&0x3F), 0x80|((cp>>6)&0x3F), 0x80|(cp&0x3F)];
+
+    bytes.forEach(byte => {
+      totalBytes++;
+      const group = document.createElement('div');
+      group.className = 'byte-group';
+      const bitsEl = document.createElement('div');
+      bitsEl.className = 'byte-bits';
+      for (let i = 7; i >= 0; i--) {
+        const bit = (byte >> i) & 1;
+        const cell = document.createElement('div');
+        cell.className = 'bit-cell ' + (bit ? 'one' : 'zero');
+        cell.textContent = bit;
+        bitsEl.appendChild(cell);
+      }
+      const charEl = document.createElement('div');
+      charEl.className = 'byte-char';
+      charEl.textContent = char;
+      const hexEl = document.createElement('div');
+      hexEl.className = 'byte-hex';
+      hexEl.textContent = '0x' + byte.toString(16).toUpperCase().padStart(2,'0');
+      group.appendChild(bitsEl);
+      group.appendChild(charEl);
+      group.appendChild(hexEl);
+      display.appendChild(group);
+    });
+  }
+
+  summary.textContent = val.length + ' Zeichen → ' + totalBytes + ' Byte(s) in UTF-8';
+}
+
+// NUMBER CONVERTER
+function updateConverter() {
+  let val = parseInt(document.getElementById('conv-input').value);
+  if (isNaN(val) || val < 0) val = 0;
+  if (val > 255) val = 255;
+  document.getElementById('conv-dec').textContent = val;
+  document.getElementById('conv-bin').textContent = val.toString(2).padStart(8, '0');
+  document.getElementById('conv-hex').textContent = '0x' + val.toString(16).toUpperCase().padStart(2, '0');
+  const printable = val >= 32 && val < 127;
+  document.getElementById('conv-char').textContent = printable
+    ? "ASCII-Zeichen: '" + String.fromCharCode(val) + "'"
+    : val < 32 ? 'Steuerzeichen (nicht druckbar)' : 'Erweitertes ASCII / kein Standard-Zeichen';
+}
+
+// Init
+updateByteViz();
+updateConverter();
+</script>
+</body>
+</html>
