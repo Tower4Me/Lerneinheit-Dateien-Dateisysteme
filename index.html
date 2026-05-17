@@ -3023,6 +3023,25 @@ window.showQuizResult = function(quizId, total) {
 };
 
 
+
+QUIZ_DATA.m1 = {
+  correct: ['C','C','B','C','B','B'],
+  feedback: [
+    { correct: "Richtig. 2 hoch 8 = 256 m\u00f6gliche Werte (0 bis 255). Ein Byte hat 8 Bits.",
+      wrong: "Falsch. Ein Byte hat 8 Bits. 2 hoch 8 = 256 m\u00f6gliche Werte, nicht 8 oder 128. 1024 w\u00e4re 2 hoch 10." },
+    { correct: "Richtig. 0x ist das Pr\u00e4fix f\u00fcr Hexadezimalzahlen. 0xFF = 255, 0x41 = 65 = 'A'.",
+      wrong: "Falsch. 0x steht f\u00fcr hexadezimal, nicht f\u00fcr negativ oder bin\u00e4r (das w\u00e4re 0b)." },
+    { correct: "Richtig. Ein Nibble sind genau 4 Bits, also die H\u00e4lfte eines Bytes. 4 Bits entsprechen einer Hex-Stelle.",
+      wrong: "Falsch. Ein Nibble sind 4 Bits. 2 Bits w\u00e4ren zu wenig, 8 Bits w\u00e4re ein Byte." },
+    { correct: "Richtig. 0xFF: F=15, also 15*16 + 15 = 255. Das ist der gr\u00f6\u00dfte Wert eines Bytes.",
+      wrong: "Falsch. 0xFF = 15*16 + 15 = 255. Nicht 15 (w\u00e4re 0x0F), nicht 240 (w\u00e4re 0xF0), nicht 256 (Bytes gehen bis 255)." },
+    { correct: "Richtig. Hersteller nutzen dezimale TB (10 hoch 12 Byte), Windows zeigt bin\u00e4re GiB (2 hoch 30 Byte). Zwei verschiedene Definitionen.",
+      wrong: "Falsch. Die Festplatte ist nicht defekt und Windows rechnet nicht falsch. Es sind einfach zwei verschiedene Definitionen desselben Begriffs." },
+    { correct: "Richtig. 1 Byte = 8 Bits, 1 Hex-Stelle = 4 Bits. Also 8/4 = 2 Hex-Stellen pro Byte. Deshalb z.B. 0xFF oder 0x41.",
+      wrong: "Falsch. 1 Hex-Stelle = 4 Bits = halbes Byte. Ein Byte braucht 2 Hex-Stellen. 4 w\u00e4ren 16 Bits = 2 Bytes." }
+  ]
+};
+
 </script>
 </body>
 </html>
