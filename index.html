@@ -1505,9 +1505,201 @@ file datei.xyz</div>
       </div>
     </div>
   </div>
-  <div class="page" id="page-m4-binaer"><span class="chapter-tag tag-bin">Modul 04</span><h1>Bin&auml;rdateien &amp; Magic Bytes</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
-  <div class="page" id="page-m4-hex"><span class="chapter-tag tag-bin">Modul 04</span><h1>Hex-Viewer &amp; Rater</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
-  <div class="page" id="page-m4-quiz"><span class="chapter-tag tag-quiz">Quiz 4</span><h1>Quiz 4</h1><p class="lead">Folgt wenn Modul 4 fertig ist.</p></div>
+  <!-- ══ MODUL 4: BINÄRDATEIEN & MAGIC BYTES ══ -->
+  <div class="page" id="page-m4-binaer">
+    <span class="chapter-tag tag-bin">Modul 04 &middot; Bin&auml;rdateien</span>
+    <h1>Bin&auml;rdateien &amp; Magic Bytes</h1>
+    <p class="lead">Eine Bin&auml;rdatei speichert Daten in einem Format das direkt f&uuml;r Maschinen optimiert ist. Jedes Byte kann jeden Wert von 0 bis 255 annehmen &ndash; nicht nur druckbare Zeichen.</p>
+
+    <h2>Bin&auml;r vs. Text</h2>
+    <div class="card-grid">
+      <div class="card-item cyan">
+        <div class="card-label">Textdatei</div>
+        <h4>Lesbare Zeichen</h4>
+        <p>Bytes repr&auml;sentieren druckbare Zeichen gem&auml;&szlig; einer Kodierung (ASCII, UTF-8). Mit jedem Texteditor lesbar. Zeilenenden haben Bedeutung.</p>
+      </div>
+      <div class="card-item yellow">
+        <div class="card-label">Bin&auml;rdatei</div>
+        <h4>Rohe Bytes</h4>
+        <p>Bytes k&ouml;nnen beliebige Werte haben. Bedeutung h&auml;ngt vom Format ab. Im Texteditor sieht man nur Zeichensalat. Braucht ein spezielles Programm.</p>
+      </div>
+    </div>
+
+    <div class="info-box yellow">
+      <div class="box-label">Was passiert wenn man eine Bin&auml;rdatei im Texteditor &ouml;ffnet?</div>
+      <p>Der Editor versucht die Bytes als Zeichen zu interpretieren. Bytes die keine g&uuml;ltigen UTF-8-Sequenzen sind, werden als <code style="font-family:'DM Mono',monospace">&#xFFFD;</code> (Ersatzzeichen) oder als Zeichensalat dargestellt. Die Datei selbst wird dabei nicht besch&auml;digt &ndash; solange man sie nicht speichert.</p>
+    </div>
+
+    <h2>Magic Bytes &ndash; der Fingerabdruck einer Datei</h2>
+    <p>Jedes Bin&auml;rformat hat eine eindeutige Signatur in den ersten Bytes: die sogenannten <strong>Magic Bytes</strong> (auch File Signature = Dateisignatur oder Magic Number = magische Zahl). Das Betriebssystem und Programme nutzen sie um den echten Dateityp zu erkennen &ndash; unabh&auml;ngig von der Dateiendung.</p>
+
+    <div class="info-box blue">
+      <div class="box-label">Warum "Magic Bytes"?</div>
+      <p>Der Begriff kommt aus der Unix-Welt. Das Programm <code style="font-family:'DM Mono',monospace">file</code> nutzt eine Datenbank von Signaturen um Dateitypen zu identifizieren. Die Bytes wirkten f&uuml;r fr&uuml;he Entwickler wie Magie weil sie den Typ verrieten ohne die Endung zu kennen.</p>
+    </div>
+
+    <h2>Bekannte Magic Bytes</h2>
+    <table class="data-table">
+      <thead><tr><th>Format</th><th>Magic Bytes (Hex)</th><th>Erkl&auml;rung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JPEG</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">FF D8 FF</code></td><td>Start of Image Marker &ndash; immer am Anfang einer JPEG-Datei</td></tr>
+        <tr><td><strong>PNG</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">89 50 4E 47 0D 0A 1A 0A</code></td><td>0x50 4E 47 = ASCII "PNG". Die anderen Bytes erkennen Fehler bei der &Uuml;bertragung.</td></tr>
+        <tr><td><strong>PDF</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">25 50 44 46</code></td><td>0x25 = %, dann ASCII "PDF" &rarr; der String "%PDF"</td></tr>
+        <tr><td><strong>ZIP</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">50 4B 03 04</code></td><td>ASCII "PK" = Phil Katz, Erfinder des ZIP-Formats</td></tr>
+        <tr><td><strong>EXE (Windows)</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">4D 5A</code></td><td>ASCII "MZ" = Mark Zbikowski, Windows-Entwickler</td></tr>
+        <tr><td><strong>MP3</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">FF FB</code> oder <code style="font-family:'DM Mono',monospace;color:var(--yellow)">49 44 33</code></td><td>FF FB = MPEG Frame Header, 49 44 33 = ASCII "ID3" (Tag-Format)</td></tr>
+        <tr><td><strong>ELF (Linux-Programm)</strong></td><td><code style="font-family:'DM Mono',monospace;color:var(--yellow)">7F 45 4C 46</code></td><td>0x7F gefolgt von ASCII "ELF" (Executable and Linkable Format)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box green">
+      <div class="box-label">Praxisbeispiel</div>
+      <p>Du bekommst eine Datei namens <code style="font-family:'DM Mono',monospace">dokument.pdf</code>. Ist es wirklich ein PDF? Mit <code style="font-family:'DM Mono',monospace">file dokument.pdf</code> (Linux/macOS) liest das System die Magic Bytes und sagt dir den echten Typ. Wenn jemand eine .exe in .pdf umbenannt hat, erkennt <code style="font-family:'DM Mono',monospace">file</code> das trotzdem.</p>
+    </div>
+
+    <h2>Hex-Dump: eine Datei von innen</h2>
+    <p>Mit einem Hex-Editor oder dem Befehl <code style="font-family:'DM Mono',monospace">xxd</code> (Linux/macOS) kannst du die rohen Bytes einer Datei als Hexadezimal-Darstellung sehen:</p>
+
+    <div class="code-block"><span class="code-lang">Linux / macOS Terminal</span><span class="cm"># Erste 4 Zeilen eines Hex-Dumps anzeigen</span>
+xxd datei.jpg | head -4
+
+<span class="cm"># Ausgabe-Beispiel (JPEG-Anfang):</span>
+<span class="hex">00000000</span>: <span class="hex">ffd8 ffe0 0010 4a46 4946 0001 0101 0060</span>  ......JFIF.....`
+<span class="hex">00000010</span>: <span class="hex">0060 0000 ffdb 0043 0008 0606 0706 0504</span>  .`.....C........
+
+<span class="cm"># Dateityp &uuml;ber Magic Bytes erkennen</span>
+file datei.xyz
+<span class="cm"># Gibt den echten Typ aus, unabh&auml;ngig von der Endung</span></div>
+
+    <div class="info-box cyan">
+      <div class="box-label">Linux-Befehle</div>
+      <p>Diese Befehle laufen in Linux- und macOS-Terminals. Unter Windows: xxd ist in Git Bash verf&uuml;gbar, oder <code style="font-family:'DM Mono',monospace">certutil -dump datei.jpg</code> als Alternative.</p>
+    </div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m3-quiz')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m4-hex')">Weiter: Hex-Viewer &amp; Rater &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 4: HEX-VIEWER & RATER ══ -->
+  <div class="page" id="page-m4-hex">
+    <span class="chapter-tag tag-bin">Modul 04 &middot; Bin&auml;rdateien</span>
+    <h1>Hex-Viewer &amp; Dateityp-Rater</h1>
+    <p class="lead">Hier kannst du Magic Bytes in Aktion sehen und &uuml;ben das Konzept zu verstehen &ndash; ohne Auswendiglernen.</p>
+
+    <h2>Interaktiv: JPEG-Hex-Viewer</h2>
+    <p>Bewege die Maus &uuml;ber die Bytes um ihre Bedeutung zu sehen:</p>
+
+    <div class="tool-box">
+      <div class="tool-label">&#9654; JPEG Datei-Header (erste 27 Bytes)</div>
+      <div class="hex-grid" id="hex-viewer"></div>
+      <div style="margin-top:0.75rem;font-size:0.75rem;color:var(--text-faint);font-family:'DM Mono',monospace">
+        Hover &uuml;ber ein Byte f&uuml;r Details
+      </div>
+    </div>
+
+    <h2>Interaktiv: Dateityp-Rater</h2>
+    <p>Du siehst die ersten Bytes einer Datei. Welches Format steckt dahinter? Es geht ums Konzept, nicht ums Auswendiglernen der genauen Bytes.</p>
+    <div class="rater-box" id="rater-container"></div>
+    <div id="rater-score" style="display:none;margin-top:0.75rem;padding:1rem;background:var(--surface2);border-radius:7px;font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--text-dim)"></div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m4-binaer')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m4-quiz')">Weiter: Quiz 4 &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 4: QUIZ ══ -->
+  <div class="page" id="page-m4-quiz">
+    <span class="chapter-tag tag-quiz">Modul 04 &middot; Quiz</span>
+    <h1>Quiz 4: Bin&auml;rdateien</h1>
+    <p class="lead">6 Fragen zu Bin&auml;rdateien, Magic Bytes und Hex-Dumps.</p>
+    <div class="quiz-container" id="quiz-m4">
+
+      <div class="quiz-question" data-q="0">
+        <div class="question-num">Frage 1 von 6</div>
+        <div class="question-text">Was sind Magic Bytes und wozu dienen sie?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'A')"><span class="option-letter">A</span> Verschl&uuml;sselungsschl&uuml;ssel die beim &Ouml;ffnen einer Datei gepr&uuml;ft werden</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'B')"><span class="option-letter">B</span> Eine eindeutige Byte-Signatur am Dateianfang die den echten Dateityp anzeigt, unabh&auml;ngig von der Endung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'C')"><span class="option-letter">C</span> Zuf&auml;llige Bytes die das Betriebssystem am Dateianfang einf&uuml;gt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'D')"><span class="option-letter">D</span> Die Dateiendung in Bin&auml;rform gespeichert</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-0"></div>
+      </div>
+
+      <div class="quiz-question" data-q="1">
+        <div class="question-num">Frage 2 von 6</div>
+        <div class="question-text">Du &ouml;ffnest eine JPEG-Datei im Texteditor und siehst unleserliche Zeichen. Was ist die Ursache?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'A')"><span class="option-letter">A</span> Die Datei ist besch&auml;digt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'B')"><span class="option-letter">B</span> Der Texteditor unterst&uuml;tzt keine Bilder</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'C')"><span class="option-letter">C</span> Die Bin&auml;r-Bytes der JPEG-Datei sind keine g&uuml;ltigen Text-Zeichen &ndash; der Editor zeigt sie trotzdem an, falsch interpretiert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'D')"><span class="option-letter">D</span> Das Betriebssystem blockiert den Zugriff</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-1"></div>
+      </div>
+
+      <div class="quiz-question" data-q="2">
+        <div class="question-num">Frage 3 von 6</div>
+        <div class="question-text">Jemand benennt eine ausf&uuml;hrbare .exe-Datei in .pdf um und schickt sie dir. Mit welchem Linux-Befehl erkennst du den echten Typ?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',2,'A')"><span class="option-letter">A</span> <code style="font-family:'DM Mono',monospace">check datei.pdf</code></button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',2,'B')"><span class="option-letter">B</span> <code style="font-family:'DM Mono',monospace">type datei.pdf</code></button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',2,'C')"><span class="option-letter">C</span> <code style="font-family:'DM Mono',monospace">file datei.pdf</code></button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',2,'D')"><span class="option-letter">D</span> <code style="font-family:'DM Mono',monospace">read --magic datei.pdf</code></button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-2"></div>
+      </div>
+
+      <div class="quiz-question" data-q="3">
+        <div class="question-num">Frage 4 von 6</div>
+        <div class="question-text">Was zeigt ein Hex-Dump einer Datei an?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'A')"><span class="option-letter">A</span> Den Dateinamen und die Metadaten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'B')"><span class="option-letter">B</span> Den rohen Inhalt der Datei als Hexadezimalwerte, Byte f&uuml;r Byte</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'C')"><span class="option-letter">C</span> Nur die ersten Bytes einer Datei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'D')"><span class="option-letter">D</span> Die Dateigr&ouml;&szlig;e in Hexadezimal</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-3"></div>
+      </div>
+
+      <div class="quiz-question" data-q="4">
+        <div class="question-num">Frage 5 von 6</div>
+        <div class="question-text">Wof&uuml;r steht "PK" in den Magic Bytes einer ZIP-Datei (50 4B)?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',4,'A')"><span class="option-letter">A</span> Packed-Komprimierung, das Standard-Komprimierungsverfahren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',4,'B')"><span class="option-letter">B</span> Phil Katz, der Erfinder des ZIP-Formats</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',4,'C')"><span class="option-letter">C</span> Primary Key, ein eindeutiger Bezeichner im Archiv</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',4,'D')"><span class="option-letter">D</span> Packet Kernel, ein internes Windows-Format</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-4"></div>
+      </div>
+
+      <div class="quiz-question" data-q="5">
+        <div class="question-num">Frage 6 von 6</div>
+        <div class="question-text">Eine .docx-Datei hat die Magic Bytes 50 4B 03 04 &ndash; dieselben wie eine ZIP-Datei. Was bedeutet das?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'A')"><span class="option-letter">A</span> Die Datei ist besch&auml;digt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'B')"><span class="option-letter">B</span> Es handelt sich um einen Zufall</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'C')"><span class="option-letter">C</span> Eine .docx-Datei ist intern ein ZIP-Archiv mit XML-Dateien &ndash; du kannst sie in .zip umbenennen und entpacken</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'D')"><span class="option-letter">D</span> Word-Dokumente werden vor dem Speichern komprimiert</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m4-5"></div>
+      </div>
+
+      <div class="quiz-result" id="result-m4">
+        <div class="result-score" id="result-score-m4"></div>
+        <div class="result-label">Punkte erreicht</div>
+        <div class="result-msg" id="result-msg-m4"></div>
+        <button class="reset-btn" onclick="resetQuiz('m4')">Quiz zur&uuml;cksetzen</button>
+        <button class="btn-nav primary" style="margin-left:0.65rem" onclick="showPage('m5-formate')">Weiter zu Modul 5 &#8594;</button>
+      </div>
+    </div>
+  </div>
   <div class="page" id="page-m5-formate"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Dateiformate</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
   <div class="page" id="page-m5-komprimierung"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Komprimierung</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
   <div class="page" id="page-m5-quiz"><span class="chapter-tag tag-quiz">Quiz 5</span><h1>Quiz 5</h1><p class="lead">Folgt wenn Modul 5 fertig ist.</p></div>
@@ -1801,6 +1993,164 @@ function updateCRLF() {
 
 // CRLF init nach kurzer Verzögerung
 setTimeout(updateCRLF, 100);
+
+
+QUIZ_DATA.m4 = {
+  correct: ['B','C','C','B','B','C'],
+  feedback: [
+    { correct: "Richtig. Magic Bytes sind eine feste Byte-Signatur am Anfang einer Datei. Das Programm 'file' unter Linux liest sie und erkennt den echten Typ, egal wie die Datei hei\u00dft.",
+      wrong: "Falsch. Magic Bytes sind keine Verschl\u00fcsselungsschl\u00fcssel, keine zuf\u00e4lligen Bytes und keine kodierte Dateiendung. Es ist eine standardisierte Signatur die das Format eindeutig kennzeichnet." },
+    { correct: "Richtig. JPEG-Daten sind Bin\u00e4rbytes die keine g\u00fcltigen Textzeichen sind. Der Editor versucht sie als UTF-8 zu lesen und scheitert. Die Datei selbst bleibt unbesch\u00e4digt solange man nicht speichert.",
+      wrong: "Falsch. Die Datei ist nicht besch\u00e4digt. Der Editor 'unterst\u00fctzt' Bilder in dem Sinn dass er sie lesen kann, nur nicht sinnvoll anzeigen. Das Betriebssystem blockiert nichts. Das Problem ist die falsche Interpretation von Bin\u00e4rbytes als Text." },
+    { correct: "Richtig. Der Befehl 'file' liest die Magic Bytes und bestimmt den echten Dateityp. Er ignoriert die Dateiendung komplett.",
+      wrong: "Falsch. 'check' und 'read --magic' sind keine Linux-Standardbefehle. 'type' ist ein Windows-CMD-Befehl der den Dateiinhalt ausgibt. Der richtige Befehl ist 'file'." },
+    { correct: "Richtig. xxd gibt den kompletten Inhalt einer Datei als Hex-Werte aus, Byte f\u00fcr Byte, mit der Adresse links und dem ASCII-\u00c4quivalent rechts.",
+      wrong: "Falsch. Ein Hex-Dump zeigt den gesamten Inhalt, nicht nur Metadaten oder die Dateigr\u00f6\u00dfe. Mit 'head -4' siehst du nur die ersten Zeilen, aber das ist eine Einschr\u00e4nkung des head-Befehls, nicht des Hex-Dumps." },
+    { correct: "Richtig. PK steht f\u00fcr Phil Katz, den Entwickler des PKZIP-Programms (1989). Er hat das ZIP-Format ma\u00dfgeblich gepr\u00e4gt.",
+      wrong: "Falsch. PK hat nichts mit Komprimierungsverfahren, Primary Keys oder Windows-Formaten zu tun. Es sind schlicht die Initialen von Phil Katz, dem ZIP-Erfinder." },
+    { correct: "Richtig. .docx ist intern ein ZIP-Archiv. Es enth\u00e4lt XML-Dateien f\u00fcr den Text, Ordner f\u00fcr Bilder und eine [Content_Types].xml. Du kannst eine .docx in .zip umbenennen und mit jedem Archiv-Programm entpacken.",
+      wrong: "Falsch. Die Datei ist nicht besch\u00e4digt und es ist kein Zufall. Word komprimiert nicht zus\u00e4tzlich \u2013 die Datei IST ein ZIP-Archiv. Das ist Microsofts bewusstes Design seit Office 2007." }
+  ]
+};
+
+// HEX VIEWER
+const jpegBytes = [
+  { hex: 'FF', info: 'Start of Image (SOI) Marker \u2013 Byte 1/2. Jede JPEG-Datei beginnt mit FF D8.' },
+  { hex: 'D8', info: 'Start of Image (SOI) Marker \u2013 Byte 2/2. FF D8 = Magic Bytes des JPEG-Formats.' },
+  { hex: 'FF', info: 'Marker-Pr\u00e4fix. In JPEG leitet FF immer einen Marker ein.' },
+  { hex: 'E0', info: 'APP0 Marker \u2013 zeigt an dass JFIF-Metadaten folgen.' },
+  { hex: '00', info: 'L\u00e4nge des APP0-Segments (High Byte) \u2013 zusammen mit dem n\u00e4chsten Byte.' },
+  { hex: '10', info: 'L\u00e4nge des APP0-Segments (Low Byte) \u2013 0x0010 = 16 Bytes.' },
+  { hex: '4A', info: 'ASCII "J" \u2013 Beginn des Strings "JFIF" (JPEG File Interchange Format).' },
+  { hex: '46', info: 'ASCII "F" \u2013 zweites Zeichen von "JFIF".' },
+  { hex: '49', info: 'ASCII "I" \u2013 drittes Zeichen von "JFIF".' },
+  { hex: '46', info: 'ASCII "F" \u2013 viertes Zeichen von "JFIF".' },
+  { hex: '00', info: 'Null-Terminator \u2013 Ende des "JFIF"-Strings.' },
+  { hex: '01', info: 'JFIF-Version Major: 1 (Version 1.x).' },
+  { hex: '01', info: 'JFIF-Version Minor: 1 (Version 1.1).' },
+  { hex: '01', info: 'Einheitenkennung: 1 = DPI (dots per inch = Punkte pro Zoll).' },
+  { hex: '00', info: 'X-Dichte (High Byte) \u2013 horizontale Aufl\u00f6sung.' },
+  { hex: '60', info: 'X-Dichte (Low Byte) \u2013 0x60 = 96 DPI horizontal.' },
+  { hex: '00', info: 'Y-Dichte (High Byte) \u2013 vertikale Aufl\u00f6sung.' },
+  { hex: '60', info: 'Y-Dichte (Low Byte) \u2013 0x60 = 96 DPI vertikal.' },
+  { hex: '00', info: 'Thumbnail-Breite: 0 = kein eingebettetes Thumbnail.' },
+  { hex: '00', info: 'Thumbnail-H\u00f6he: 0 = kein eingebettetes Thumbnail.' },
+  { hex: 'FF', info: 'Beginn eines neuen Markers.' },
+  { hex: 'DB', info: 'DQT Marker (Define Quantization Table = Quantisierungstabelle definieren) \u2013 f\u00fcr JPEG-Komprimierung.' },
+  { hex: '00', info: 'L\u00e4nge der Quantisierungstabelle (High Byte).' },
+  { hex: '43', info: 'L\u00e4nge = 0x43 = 67 Bytes.' },
+  { hex: '00', info: 'Tabellen-ID und Pr\u00e4zision: ID 0, 8-Bit-Werte.' },
+  { hex: '08', info: 'Erster Quantisierungswert: 8 \u2013 bestimmt die Komprimierungsst\u00e4rke.' },
+  { hex: '06', info: 'Zweiter Quantisierungswert: 6.' }
+];
+
+function initHexViewer() {
+  const container = document.getElementById('hex-viewer');
+  if (!container || container.children.length > 0) return;
+  jpegBytes.forEach(b => {
+    const el = document.createElement('div');
+    el.className = 'hex-byte';
+    el.innerHTML = '<span class="hex-top">' + b.hex + '</span>' +
+      '<div class="hex-tooltip">' + b.info + '</div>';
+    container.appendChild(el);
+  });
+}
+
+// DATEITYP RATER
+const raterQuestions = [
+  {
+    bytes: 'FF D8 FF E0 ...',
+    hint: 'Diese Bytes markieren immer den Anfang desselben Bildformats. FF D8 ist der "Start of Image" Marker.',
+    options: ['JPEG-Bild', 'PNG-Bild', 'PDF-Dokument', 'ZIP-Archiv'],
+    correct: 0,
+    exp: 'Richtig. FF D8 FF ist der eindeutige Magic-Byte-Anfang jeder JPEG-Datei. Der "Start of Image" Marker FF D8 leitet jede JPEG ein.'
+  },
+  {
+    bytes: '25 50 44 46 2D ...',
+    hint: 'Die Bytes 25 50 44 46 entsprechen in ASCII den Zeichen "%PDF". Ein klassisches Beispiel wo Magic Bytes lesbar sind.',
+    options: ['Word-Dokument', 'PNG-Bild', 'PDF-Dokument', 'Shell-Skript'],
+    correct: 2,
+    exp: 'Richtig. 0x25 = %, 0x50 = P, 0x44 = D, 0x46 = F. Die Magic Bytes bilden den ASCII-String "%PDF".'
+  },
+  {
+    bytes: '50 4B 03 04 ...',
+    hint: '0x50 = P, 0x4B = K. Die n\u00e4chsten Bytes sind Versionsinformationen. Das Format wurde von einer bekannten Person erfunden.',
+    options: ['RAR-Archiv', 'ZIP-Archiv (oder .docx/.xlsx)', '7-Zip-Archiv', 'TAR-Archiv'],
+    correct: 1,
+    exp: 'Richtig. PK = Phil Katz, Erfinder des ZIP-Formats. Weil .docx und .xlsx intern ZIP-Archive sind, haben sie dieselben Magic Bytes.'
+  },
+  {
+    bytes: '7F 45 4C 46 02 01 ...',
+    hint: '0x45 4C 46 = ASCII "ELF". Dieser Dateityp l\u00e4uft direkt auf dem Prozessor.',
+    options: ['Linux-Programm (ELF)', 'Windows-Programm (.exe)', 'Java-Programm (.jar)', 'Python-Skript'],
+    correct: 0,
+    exp: 'Richtig. ELF (Executable and Linkable Format) ist das Programmformat von Linux und anderen Unix-Systemen. 0x7F gefolgt von ASCII "ELF" ist die Signatur.'
+  },
+  {
+    bytes: '89 50 4E 47 0D 0A 1A 0A ...',
+    hint: '0x50 4E 47 = ASCII "PNG". Die zus\u00e4tzlichen Bytes dienen zur Fehlererkennung bei der \u00dcbertragung.',
+    options: ['GIF-Bild', 'BMP-Bild', 'TIFF-Bild', 'PNG-Bild'],
+    correct: 3,
+    exp: 'Richtig. Der PNG-Header ist besonders lang um \u00dcbertragungsfehler zu erkennen: 0D 0A erkennt falsche Zeilenenden, 1A stoppt fehlerhafte Anzeige in alten Texteditoren.'
+  }
+];
+
+let raterAnswered = {};
+
+function initRater() {
+  const container = document.getElementById('rater-container');
+  if (!container || container.children.length > 0) return;
+  raterQuestions.forEach((q, qi) => {
+    const el = document.createElement('div');
+    el.className = 'rater-question';
+    el.id = 'rq-' + qi;
+    el.innerHTML =
+      '<div style="font-family:\'DM Mono\',monospace;font-size:0.68rem;color:var(--text-faint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">Frage ' + (qi+1) + ' von ' + raterQuestions.length + '</div>' +
+      '<div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.5rem">' + q.hint + '</div>' +
+      '<div class="rater-bytes">' + q.bytes + '</div>' +
+      '<div class="rater-opts">' +
+        q.options.map((o,oi) =>
+          '<button class="rater-opt" onclick="raterAnswer(' + qi + ',' + oi + ')">' + o + '</button>'
+        ).join('') +
+      '</div>' +
+      '<div id="rater-fb-' + qi + '" style="margin-top:0.6rem;font-size:0.8rem;display:none"></div>';
+    container.appendChild(el);
+  });
+}
+
+function raterAnswer(qi, oi) {
+  if (raterAnswered[qi] !== undefined) return;
+  raterAnswered[qi] = oi;
+  const q = raterQuestions[qi];
+  const opts = document.querySelectorAll('#rq-' + qi + ' .rater-opt');
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if (i === q.correct) o.classList.add('correct');
+    else if (i === oi) o.classList.add('wrong');
+  });
+  const fb = document.getElementById('rater-fb-' + qi);
+  const correct = oi === q.correct;
+  fb.style.display = 'block';
+  fb.style.color = correct ? 'var(--green)' : 'var(--red)';
+  fb.textContent = (correct ? '\u2713 ' : '\u2717 ') + q.exp;
+
+  if (Object.keys(raterAnswered).length === raterQuestions.length) {
+    const score = Object.entries(raterAnswered).filter(([i,a]) => Number(a) === raterQuestions[i].correct).length;
+    const scoreEl = document.getElementById('rater-score');
+    scoreEl.style.display = 'block';
+    scoreEl.textContent = 'Ergebnis: ' + score + ' / ' + raterQuestions.length + ' \u2013 ' +
+      (score >= 4 ? 'Sehr gut! Das Konzept sitzt.' : score >= 3 ? 'Gut. Ein paar Konzepte nochmal durchlesen.' : 'Schau nochmal in die Theorie.');
+  }
+}
+
+// Init beim Seitenaufruf
+const _origShowPageM4 = showPage;
+window.showPage = function(id) {
+  _origShowPageM4(id);
+  if (id === 'm4-hex') {
+    setTimeout(() => { initHexViewer(); initRater(); }, 50);
+  }
+};
 
 </script>
 </body>
