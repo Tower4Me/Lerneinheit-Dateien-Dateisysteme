@@ -1700,9 +1700,263 @@ file datei.xyz
       </div>
     </div>
   </div>
-  <div class="page" id="page-m5-formate"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Dateiformate</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
-  <div class="page" id="page-m5-komprimierung"><span class="chapter-tag tag-fmt">Modul 05</span><h1>Komprimierung</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
-  <div class="page" id="page-m5-quiz"><span class="chapter-tag tag-quiz">Quiz 5</span><h1>Quiz 5</h1><p class="lead">Folgt wenn Modul 5 fertig ist.</p></div>
+  <!-- ══ MODUL 5: DATEIFORMATE ══ -->
+  <div class="page" id="page-m5-formate">
+    <span class="chapter-tag tag-fmt">Modul 05 &middot; Dateiformate</span>
+    <h1>Dateiformate nach Kategorie</h1>
+    <p class="lead">Es gibt tausende Dateiformate. Was du kennen musst: die g&auml;ngigen Formate pro Kategorie, wof&uuml;r sie optimiert sind und wann man welches nimmt.</p>
+
+    <h2>Bilddateien</h2>
+    <table class="data-table">
+      <thead><tr><th>Format</th><th>Komprimierung</th><th>Transparenz</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JPEG / JPG</strong></td><td>Verlustbehaftet</td><td>Nein</td><td>Fotos, Bilder mit vielen Farben</td></tr>
+        <tr><td><strong>PNG</strong></td><td>Verlustfrei</td><td>Ja (Alpha-Kanal)</td><td>Screenshots, Logos, Grafiken mit Text</td></tr>
+        <tr><td><strong>GIF</strong></td><td>Verlustfrei</td><td>Ja (1-Bit)</td><td>Animationen, max. 256 Farben</td></tr>
+        <tr><td><strong>WebP</strong></td><td>Verlustfrei &amp; verlustbehaftet</td><td>Ja</td><td>Web-Optimierung, moderner JPEG/PNG-Ersatz</td></tr>
+        <tr><td><strong>SVG</strong></td><td>Keine (Vektorgrafik)</td><td>Ja</td><td>Logos, Icons, skalierbare Grafiken</td></tr>
+        <tr><td><strong>BMP</strong></td><td>Keine (unkomprimiert)</td><td>Begrenzt</td><td>Windows-intern, sehr gro&szlig;e Dateien</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box blue">
+      <div class="box-label">Raster vs. Vektor</div>
+      <p><strong>Rastergrafik</strong> (JPEG, PNG, GIF): Das Bild besteht aus einem Raster von Pixeln. Vergr&ouml;&szlig;ern macht es unsch&auml;rfer.<br>
+      <strong>Vektorgrafik</strong> (SVG): Das Bild besteht aus mathematischen Kurven und Formen. Beliebig skalierbar ohne Qualit&auml;tsverlust. SVG (Scalable Vector Graphics = skalierbare Vektorgrafik) ist das Standardformat im Web.</p>
+    </div>
+
+    <h2>Audiodateien</h2>
+    <table class="data-table">
+      <thead><tr><th>Format</th><th>Komprimierung</th><th>Qualit&auml;t</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MP3</strong></td><td>Verlustbehaftet</td><td>Gut bei kleiner Dateigr&ouml;&szlig;e</td><td>Musik, Podcasts, breite Unterst&uuml;tzung</td></tr>
+        <tr><td><strong>AAC</strong></td><td>Verlustbehaftet</td><td>Besser als MP3 bei gleicher Gr&ouml;&szlig;e</td><td>Streaming (Spotify, Apple Music)</td></tr>
+        <tr><td><strong>FLAC</strong></td><td>Verlustfrei</td><td>Original-Qualit&auml;t</td><td>Archivierung, Audiophile</td></tr>
+        <tr><td><strong>WAV</strong></td><td>Keine (unkomprimiert)</td><td>H&ouml;chste Qualit&auml;t</td><td>Tonstudio, professionelle Bearbeitung</td></tr>
+        <tr><td><strong>OGG</strong></td><td>Verlustbehaftet</td><td>Gut</td><td>Open-Source-Alternative zu MP3</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Videodateien</h2>
+    <div class="info-box yellow">
+      <div class="box-label">Container vs. Codec</div>
+      <p>Bei Video gibt es zwei Konzepte: <strong>Container</strong> (das Dateiformat: .mp4, .mkv, .avi) und <strong>Codec</strong> (das Komprimierungsverfahren: H.264, H.265, AV1). Ein Container kann verschiedene Codecs enthalten. Eine .mp4-Datei kann H.264 oder H.265 verwenden.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Container</th><th>Typische Codecs</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MP4 (.mp4)</strong></td><td>H.264, H.265</td><td>Web, Streaming, universell</td></tr>
+        <tr><td><strong>MKV (.mkv)</strong></td><td>Fast alle</td><td>Filme mit mehreren Tonspuren/Untertiteln</td></tr>
+        <tr><td><strong>AVI (.avi)</strong></td><td>DivX, Xvid</td><td>Veraltet, kaum noch genutzt</td></tr>
+        <tr><td><strong>WebM (.webm)</strong></td><td>VP8, VP9, AV1</td><td>Web-Video (Open Source)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Archiv- und Komprimierungsformate</h2>
+    <table class="data-table">
+      <thead><tr><th>Format</th><th>Komprimierung</th><th>Verschl&uuml;sselung</th><th>Besonderheit</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ZIP (.zip)</strong></td><td>Deflate (verlustfrei)</td><td>Optional (schwach)</td><td>Universal, &uuml;berall unterst&uuml;tzt</td></tr>
+        <tr><td><strong>7-Zip (.7z)</strong></td><td>LZMA (verlustfrei)</td><td>AES-256 (stark)</td><td>Sehr hohe Komprimierungsrate</td></tr>
+        <tr><td><strong>RAR (.rar)</strong></td><td>RAR-Algorithmus</td><td>AES-256</td><td>Wiederherstellung bei Dateifehler</td></tr>
+        <tr><td><strong>TAR (.tar)</strong></td><td>Keine (nur Archivierung)</td><td>Nein</td><td>Linux-Standard, oft mit .gz oder .bz2</td></tr>
+        <tr><td><strong>GZ (.tar.gz)</strong></td><td>Gzip (verlustfrei)</td><td>Nein</td><td>Linux-Pakete, schnell</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box cyan">
+      <div class="box-label">TAR erkl&auml;rt</div>
+      <p>TAR (Tape Archive = Bandarchiv) packt nur Dateien zusammen ohne zu komprimieren. Deshalb kombiniert man es: <code style="font-family:'DM Mono',monospace">tar.gz</code> = TAR-Archiv mit Gzip-Komprimierung, <code style="font-family:'DM Mono',monospace">tar.bz2</code> = TAR mit Bzip2. Das ist unter Linux der Standard f&uuml;r Softwarepakete.</p>
+    </div>
+
+    <h2>Dokument- und Textformate</h2>
+    <table class="data-table">
+      <thead><tr><th>Format</th><th>Typ</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TXT (.txt)</strong></td><td>Reiner Text</td><td>Einfachste Textdatei, kein Format</td></tr>
+        <tr><td><strong>HTML (.html)</strong></td><td>Textbasiert (Markup)</td><td>Webseiten</td></tr>
+        <tr><td><strong>XML (.xml)</strong></td><td>Textbasiert (Markup)</td><td>Datenaustausch, Konfiguration</td></tr>
+        <tr><td><strong>JSON (.json)</strong></td><td>Textbasiert</td><td>API-Daten, Konfiguration, modern</td></tr>
+        <tr><td><strong>PDF (.pdf)</strong></td><td>Bin&auml;r (Vektoren + Raster)</td><td>Druckfertige Dokumente, nicht editierbar</td></tr>
+        <tr><td><strong>DOCX (.docx)</strong></td><td>ZIP mit XML</td><td>Word-Dokumente, editierbar</td></tr>
+        <tr><td><strong>CSV (.csv)</strong></td><td>Reiner Text</td><td>Tabellendaten, Datenbankexport</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m4-quiz')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m5-komprimierung')">Weiter: Komprimierung &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 5: KOMPRIMIERUNG ══ -->
+  <div class="page" id="page-m5-komprimierung">
+    <span class="chapter-tag tag-fmt">Modul 05 &middot; Dateiformate</span>
+    <h1>Komprimierung</h1>
+    <p class="lead">Komprimierung reduziert die Dateigr&ouml;&szlig;e. Es gibt zwei grundlegend verschiedene Ans&auml;tze: verlustfrei und verlustbehaftet. Die Wahl h&auml;ngt davon ab was wichtiger ist &ndash; Qualit&auml;t oder Gr&ouml;&szlig;e.</p>
+
+    <h2>Verlustfreie Komprimierung</h2>
+    <p>Bei verlustfreier Komprimierung (Lossless Compression) kann die Originaldatei <strong>exakt</strong> wiederhergestellt werden. Kein einziges Bit geht verloren.</p>
+
+    <div class="info-box green">
+      <div class="box-label">Wie funktioniert das?</div>
+      <p>Verlustfreie Algorithmen suchen nach Mustern und Wiederholungen. Statt "AAAAAABBB" zu speichern, speichern sie "6A3B" (6 mal A, 3 mal B). Das nennt sich Run-Length Encoding (Laufl&auml;ngenkodierung). Modernere Algorithmen (Huffman, LZ77, LZMA) sind deutlich komplexer aber das Prinzip ist dasselbe.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card-item green">
+        <div class="card-label">Verlustfrei &ndash; Einsatz</div>
+        <h4>Wenn Originalqualit&auml;t Pflicht ist</h4>
+        <p>Dokumente (ZIP, 7z), Programmcode, medizinische Bilder, Audio-Archivierung (FLAC), PNG-Grafiken mit Text. Alles wo ein ver&auml;ndertes Bit einen Unterschied macht.</p>
+      </div>
+      <div class="card-item blue">
+        <div class="card-label">Verlustfrei &ndash; Formate</div>
+        <h4>PNG, FLAC, ZIP, 7z, GIF, WebP (verlustfrei)</h4>
+        <p>Typische Komprimierungsraten: 20&ndash;80% kleinere Dateien je nach Inhalt. Textdateien lassen sich sehr gut komprimieren, bereits komprimierte Dateien kaum noch.</p>
+      </div>
+    </div>
+
+    <h2>Verlustbehaftete Komprimierung</h2>
+    <p>Bei verlustbehafteter Komprimierung (Lossy Compression) werden Informationen die das menschliche Auge oder Ohr kaum wahrnimmt <strong>dauerhaft gel&ouml;scht</strong>. Die Originaldatei kann nicht mehr exakt wiederhergestellt werden.</p>
+
+    <div class="info-box yellow">
+      <div class="box-label">Wie funktioniert das bei JPEG?</div>
+      <p>JPEG teilt das Bild in 8x8-Pixel-Bl&ouml;cke und wendet eine mathematische Transformation (DCT = Discrete Cosine Transform = Diskrete Kosinustransformation) an. Dann werden Details die das Auge schwer wahrnimmt (hohe Frequenzen, subtile Farb&uuml;berg&auml;nge) verworfen. Je h&ouml;her die Komprimierung, desto mehr Details gehen verloren. Typische Erkennungszeichen: blockige Artefakte besonders an Kanten.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card-item yellow">
+        <div class="card-label">Verlustbehaftet &ndash; Einsatz</div>
+        <h4>Wenn Gr&ouml;&szlig;e wichtiger als Perfektion ist</h4>
+        <p>Fotos im Web (JPEG), Musik-Streaming (MP3, AAC), Video-Streaming (H.264). Der Qualit&auml;tsverlust ist bei guten Einstellungen f&uuml;r den Durchschnittsmenschen kaum wahrnehmbar.</p>
+      </div>
+      <div class="card-item red">
+        <div class="card-label">Verlustbehaftet &ndash; Warnung</div>
+        <h4>Niemals mehrfach komprimieren</h4>
+        <p>Jedes Mal wenn du eine JPEG-Datei speicherst und dabei neu komprimierst, gehen mehr Details verloren. "Generation Loss" nennt man diesen Effekt. Immer im Originalformat arbeiten, erst am Ende komprimieren.</p>
+      </div>
+    </div>
+
+    <h2>Vergleich auf einen Blick</h2>
+    <table class="data-table">
+      <thead><tr><th>Eigenschaft</th><th>Verlustfrei</th><th>Verlustbehaftet</th></tr></thead>
+      <tbody>
+        <tr><td>Originalqualit&auml;t wiederherstellbar</td><td style="color:var(--green)">Ja, exakt</td><td style="color:var(--red)">Nein</td></tr>
+        <tr><td>Typische Komprimierungsrate</td><td>20&ndash;80%</td><td>90&ndash;99%</td></tr>
+        <tr><td>Mehrfach komprimieren</td><td style="color:var(--green)">Kein Qualit&auml;tsverlust</td><td style="color:var(--red)">Qualit&auml;t nimmt ab</td></tr>
+        <tr><td>Typische Formate</td><td>PNG, FLAC, ZIP, 7z</td><td>JPEG, MP3, AAC, H.264</td></tr>
+        <tr><td>Einsatz</td><td>Dokumente, Code, Archivierung</td><td>Fotos, Musik, Videos f&uuml;r Endnutzer</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m5-formate')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m5-quiz')">Weiter: Quiz 5 &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 5: QUIZ ══ -->
+  <div class="page" id="page-m5-quiz">
+    <span class="chapter-tag tag-quiz">Modul 05 &middot; Quiz</span>
+    <h1>Quiz 5: Dateiformate &amp; Komprimierung</h1>
+    <p class="lead">7 Fragen.</p>
+    <div class="quiz-container" id="quiz-m5">
+
+      <div class="quiz-question" data-q="0">
+        <div class="question-num">Frage 1 von 7</div>
+        <div class="question-text">Du willst ein Logo als Bilddatei speichern. Es soll transparent sein, skalierbar und auf jeder Bildschirmgr&ouml;&szlig;e scharf bleiben. Welches Format ist geeignet?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',0,'A')"><span class="option-letter">A</span> JPEG</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',0,'B')"><span class="option-letter">B</span> PNG</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',0,'C')"><span class="option-letter">C</span> SVG</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',0,'D')"><span class="option-letter">D</span> BMP</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-0"></div>
+      </div>
+
+      <div class="quiz-question" data-q="1">
+        <div class="question-num">Frage 2 von 7</div>
+        <div class="question-text">Was ist der Unterschied zwischen einem Video-Container und einem Codec?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'A')"><span class="option-letter">A</span> Es gibt keinen Unterschied, beide bezeichnen dasselbe</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'B')"><span class="option-letter">B</span> Der Container ist das Dateiformat (.mp4, .mkv), der Codec das Komprimierungsverfahren (H.264, H.265)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'C')"><span class="option-letter">C</span> Der Codec ist das Dateiformat, der Container die Videospur</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'D')"><span class="option-letter">D</span> Container sind nur f&uuml;r Audio, Codecs nur f&uuml;r Video</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-1"></div>
+      </div>
+
+      <div class="quiz-question" data-q="2">
+        <div class="question-num">Frage 3 von 7</div>
+        <div class="question-text">Welches Komprimierungsverfahren erlaubt die exakte Wiederherstellung der Originaldatei?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',2,'A')"><span class="option-letter">A</span> Verlustbehaftet (Lossy)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',2,'B')"><span class="option-letter">B</span> Verlustfrei (Lossless)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',2,'C')"><span class="option-letter">C</span> Beide erlauben exakte Wiederherstellung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',2,'D')"><span class="option-letter">D</span> Weder noch &ndash; Komprimierung ist immer verlustbehaftet</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-2"></div>
+      </div>
+
+      <div class="quiz-question" data-q="3">
+        <div class="question-num">Frage 4 von 7</div>
+        <div class="question-text">Du bearbeitest ein Foto und speicherst es mehrfach als JPEG. Was passiert mit der Qualit&auml;t?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'A')"><span class="option-letter">A</span> Nichts &ndash; JPEG speichert verlustfrei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'B')"><span class="option-letter">B</span> Die Qualit&auml;t verbessert sich durch erneutes Komprimieren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'C')"><span class="option-letter">C</span> Die Qualit&auml;t nimmt bei jedem Speichern ab weil jedes Mal neue Informationen verloren gehen (Generation Loss)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'D')"><span class="option-letter">D</span> Die Datei wird gr&ouml;&szlig;er aber die Qualit&auml;t bleibt gleich</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-3"></div>
+      </div>
+
+      <div class="quiz-question" data-q="4">
+        <div class="question-num">Frage 5 von 7</div>
+        <div class="question-text">Was ist eine .tar.gz Datei?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'A')"><span class="option-letter">A</span> Eine verschl&uuml;sselte ZIP-Datei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'B')"><span class="option-letter">B</span> Eine Videodatei mit zwei Tonspuren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'C')"><span class="option-letter">C</span> Ein TAR-Archiv (zusammengepackte Dateien) das zus&auml;tzlich mit Gzip komprimiert wurde</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'D')"><span class="option-letter">D</span> Ein Linux-Backup-Format mit automatischer Wiederherstellung</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-4"></div>
+      </div>
+
+      <div class="quiz-question" data-q="5">
+        <div class="question-num">Frage 6 von 7</div>
+        <div class="question-text">Du willst Musik archivieren ohne Qualit&auml;tsverlust. Welches Format ist richtig?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',5,'A')"><span class="option-letter">A</span> MP3 mit h&ouml;chster Bitrate</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',5,'B')"><span class="option-letter">B</span> AAC</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',5,'C')"><span class="option-letter">C</span> FLAC</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',5,'D')"><span class="option-letter">D</span> OGG</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-5"></div>
+      </div>
+
+      <div class="quiz-question" data-q="6">
+        <div class="question-num">Frage 7 von 7</div>
+        <div class="question-text">Warum l&auml;sst sich eine bereits komprimierte ZIP-Datei kaum noch weiter komprimieren?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'A')"><span class="option-letter">A</span> Weil ZIP eine maximale Gr&ouml;&szlig;e hat</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'B')"><span class="option-letter">B</span> Weil komprimierte Daten kaum noch Muster und Wiederholungen enthalten, die Komprimierungsalgorithmen ausnutzen k&ouml;nnten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'C')"><span class="option-letter">C</span> Weil ZIP-Dateien einen Schreibschutz haben</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'D')"><span class="option-letter">D</span> Weil das Betriebssystem verschachtelte Archive verhindert</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m5-6"></div>
+      </div>
+
+      <div class="quiz-result" id="result-m5">
+        <div class="result-score" id="result-score-m5"></div>
+        <div class="result-label">Punkte erreicht</div>
+        <div class="result-msg" id="result-msg-m5"></div>
+        <button class="reset-btn" onclick="resetQuiz('m5')">Quiz zur&uuml;cksetzen</button>
+        <button class="btn-nav primary" style="margin-left:0.65rem" onclick="showPage('m6-linux')">Weiter zu Modul 6 &#8594;</button>
+      </div>
+    </div>
+  </div>
   <div class="page" id="page-m6-linux"><span class="chapter-tag tag-perm">Modul 06</span><h1>Linux Berechtigungen</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
   <div class="page" id="page-m6-windows"><span class="chapter-tag tag-perm">Modul 06</span><h1>Windows ACL</h1><p class="lead">Folgt im n&auml;chsten Update.</p></div>
   <div class="page" id="page-m6-quiz"><span class="chapter-tag tag-quiz">Quiz 6</span><h1>Quiz 6</h1><p class="lead">Folgt wenn Modul 6 fertig ist.</p></div>
@@ -2150,6 +2404,27 @@ window.showPage = function(id) {
   if (id === 'm4-hex') {
     setTimeout(() => { initHexViewer(); initRater(); }, 50);
   }
+};
+
+
+QUIZ_DATA.m5 = {
+  correct: ['C','B','B','C','C','C','B'],
+  feedback: [
+    { correct: "Richtig. SVG ist das einzige der genannten Formate das eine Vektorgrafik ist: beliebig skalierbar, transparent, ideal f\u00fcr Logos und Icons.",
+      wrong: "Falsch. JPEG unterst\u00fctzt keine Transparenz und ist verlustbehaftet. PNG ist verlustfrei mit Transparenz, aber als Rastergrafik nicht skalierbar ohne Qualit\u00e4tsverlust. BMP ist unkomprimiert und gro\u00df. Nur SVG ist skalierbar." },
+    { correct: "Richtig. Container (.mp4, .mkv) h\u00e4lt Video, Audio und Untertitel zusammen. Der Codec (H.264, H.265) ist das Verfahren mit dem das Video komprimiert wird. Ein Container kann verschiedene Codecs enthalten.",
+      wrong: "Falsch. Container und Codec sind grundverschieden. Der Container ist das Dateiformat, der Codec das Komprimierungsverfahren. Beide k\u00f6nnen Audio und Video betreffen." },
+    { correct: "Richtig. Nur verlustfreie Komprimierung (Lossless) erlaubt die exakte Wiederherstellung. ZIP, FLAC, PNG sind verlustfrei. JPEG und MP3 sind verlustbehaftet.",
+      wrong: "Falsch. Verlustbehaftete Komprimierung l\u00f6scht dauerhaft Informationen. Die exakte Wiederherstellung ist nur bei verlustfreier Komprimierung m\u00f6glich." },
+    { correct: "Richtig. Generation Loss: Bei jedem JPEG-Speichervorgang werden neue Details verworfen. Die Verluste summieren sich. Deshalb immer im Originalformat (RAW oder verlustfrei) arbeiten und erst am Ende exportieren.",
+      wrong: "Falsch. JPEG ist verlustbehaftet, nicht verlustfrei. Mehrfaches Speichern f\u00fchrt zu Generation Loss. Die Dateigr\u00f6\u00dfe kann sogar kleiner werden, aber die Qualit\u00e4t nimmt ab." },
+    { correct: "Richtig. TAR packt Dateien nur zusammen ohne zu komprimieren. Gzip komprimiert. .tar.gz = erst packen, dann komprimieren. Standard f\u00fcr Linux-Softwarepakete.",
+      wrong: "Falsch. .tar.gz hat keine Verschl\u00fcsselung, ist kein Videoformat und kein spezielles Backup-Format. Es ist TAR (Archivierung) kombiniert mit Gzip (Komprimierung)." },
+    { correct: "Richtig. FLAC (Free Lossless Audio Codec) komprimiert verlustfrei. Die Originaldaten k\u00f6nnen exakt wiederhergestellt werden. Ideal f\u00fcr Archivierung.",
+      wrong: "Falsch. MP3, AAC und OGG sind alle verlustbehaftet \u2013 egal welche Bitrate. Bei verlustbehafteter Komprimierung gehen immer Informationen dauerhaft verloren. F\u00fcr verlustfreie Audio-Archivierung ist FLAC der Standard." },
+    { correct: "Richtig. Komprimierungsalgorithmen suchen nach Mustern und Wiederholungen. Komprimierte Daten sehen f\u00fcr den Algorithmus wie zuf\u00e4llige Bytes aus \u2013 kaum noch Muster, also kaum noch Komprimierungspotenzial.",
+      wrong: "Falsch. ZIP hat kein Gr\u00f6\u00dfenlimit das relevant w\u00e4re. Kein Schreibschutz. Das Betriebssystem erlaubt verschachtelte Archive. Der Grund ist algorithmisch: keine Muster mehr in komprimierten Daten." }
+  ]
 };
 
 </script>
