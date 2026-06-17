@@ -1,46 +1,14 @@
-# Dateien & Dateisysteme
+# Lerneinheit: Dateien & Dateisysteme
 
-**Live:** [Dateien & Dateisysteme](https://tower4me.github.io/Lerneinheit-Dateien-Dateisysteme/)
+Interaktive Lernplattform zur Prüfungsvorbereitung für Fachinformatiker Systemintegration (FiSi). Behandelt Dateiformate, Dateisysteme (FAT, NTFS, ext4 u.a.), Verzeichnisstrukturen, Zugriffsrechte und Speicherorganisation, jeweils mit Quizzen und Praxisbeispielen.
 
-Eine interaktive Lernplattform zu Dateien, Dateisystemen und Kodierung für Azubis und Einsteiger ohne Vorkenntnisse. Alle Konzepte werden von Grund auf erklärt, mit Alltagsbeispielen und interaktiven Tools direkt im Browser.
+**➡️ Live-Version: [Lerneinheit-Dateien-Dateisysteme](https://tower4me.github.io/Lerneinheit-Dateien-Dateisysteme/)**
 
----
-
-## Inhalt
-
-| Modul | Thema |
-|-------|-------|
-| 01 | Bits & Bytes – Bit, Byte, Nibble, Einheiten, Zahlensysteme, Konverter |
-| 02 | Was ist eine Datei? – Metadaten, Inode, MFT, Dateisysteme (NTFS, FAT32, exFAT, ext4) |
-| 03 | Textdateien – ASCII, Unicode, UTF-8, CR/LF/CRLF, CRLF-Visualizer |
-| 04 | Binärdateien – Magic Bytes, Hex-Dump, Hex-Viewer mit Hover-Tooltips, Dateityp-Rater |
-| 05 | Dateiformate – Bild, Audio, Video, Archive, Dokumente, Komprimierung |
-| 06 | Berechtigungen – Linux rwx, Oktalnotation, chmod/chown, Windows ACL, icacls |
-| 07 | MIME & Base64 – MIME-Types, HTTP-Header, Base64-Kodierung |
-| ★  | Gesamtquiz – 20 Fragen aus allen Modulen mit Auswertung und Modulempfehlungen |
-
-Jedes Modul hat ein Quiz mit sofortigem Feedback (richtig/falsch + Begründung).
+> ⚠️ **Hinweis**
+> Dies ist privat erstelltes, inoffizielles Lernmaterial, kein offizielles Material der IHK. Die Inhalte wurden mit Unterstützung von KI erstellt und können Fehler enthalten. Keine Gewähr auf Richtigkeit oder Vollständigkeit. Das Material wird laufend verbessert. Im Zweifel immer mit offiziellen Quellen und Prüfungsunterlagen abgleichen.
 
 ---
-
-## Interaktive Tools
-
-- **Byte-Visualizer** – Text eingeben, Bits und Hex-Werte in Echtzeit sehen (bis 64 Zeichen)
-- **Zahlensystem-Konverter** – Dezimal eingeben, sofort Binär + Hex + ASCII-Zeichen
-- **CRLF-Visualizer** – Zeilenenden sichtbar machen, Linux vs. Windows Vergleich
-- **Hex-Viewer** – JPEG-Header interaktiv mit Hover-Tooltips für jeden Byte
-- **Dateityp-Rater** – Bytes sehen, Format erraten, Konzeptverständnis üben
-
----
-
-## Technologien
-
-- Vanilla HTML, CSS, JavaScript – kein Framework, kein Build-Tool
-- Google Fonts (DM Sans, DM Mono, Outfit)
-- GitHub Pages als Hosting
-
----
-
-## Zielgruppe
-
-Azubis und Einsteiger ohne Vorkenntnisse. Abkürzungen werden beim ersten Auftreten immer ausgeschrieben. Lieber zu viel erklärt als zu wenig.
+Teil einer Serie von vier FiSi-Lerneinheiten:
+[Datenbanken & SQL](https://github.com/Tower4Me/Lerneinheit-Datenbanken-SQL) ·
+[Hardware-Technologien](https://github.com/Tower4Me/Lerneinheit-Hardware-Technologien) ·
+[IT-Sicherheit & DSGVO](https://github.com/Tower4Me/Lerneinheit-IT-Sicherheit-DSGVO)
