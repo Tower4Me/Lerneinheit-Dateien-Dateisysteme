@@ -691,6 +691,7 @@ body.light .code-block {
       <div class="nav-module-header"><span class="module-num">08</span> Netzwerk-Dateisysteme</div>
       <div class="nav-items">
         <div class="nav-item" onclick="showPage('m8-nfs-smb')"><span class="item-dot"></span> NFS &amp; SMB</div>
+        <div class="nav-item" onclick="showPage('m8-blockstorage')"><span class="item-dot"></span> Block-Storage &amp; iSCSI</div>
         <div class="nav-item" onclick="showPage('m8-quiz')"><span class="item-dot"></span> Quiz 8<span class="item-score" id="score-m8"></span></div>
       </div>
     </div>
@@ -2835,6 +2836,124 @@ showmount -e fileserver
     <div class="divider"></div>
     <div style="display:flex;gap:0.75rem">
       <button class="btn-nav" onclick="showPage('m7-quiz')">&#8592; Zur&uuml;ck</button>
+      <button class="btn-nav primary" onclick="showPage('m8-blockstorage')">Weiter: Block- vs. File-Storage &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══ MODUL 8: BLOCK- VS. FILE-STORAGE & iSCSI ══ -->
+  <div class="page" id="page-m8-blockstorage">
+    <span class="chapter-tag tag-file">Modul 08 &middot; Netzwerk-Dateisysteme</span>
+    <h1>Block- vs. File-Storage &amp; iSCSI</h1>
+    <p class="lead">NFS und SMB liefern fertige Dateien &uuml;ber das Netz. Es gibt aber einen zweiten Weg: rohe Festplatten &uuml;ber das Netz, unterhalb des Dateisystems. Das ist Block-Storage, und das wichtigste Protokoll daf&uuml;r ist iSCSI.</p>
+
+    <h2>Zwei Ebenen, Speicher bereitzustellen</h2>
+    <p>Ein Dateisystem verwaltet Bl&ouml;cke (Module 2: Cluster auf dem Datentr&auml;ger). Die Frage ist nur: Auf welcher Ebene reicht ein Server den Speicher &uuml;ber das Netz weiter, auf der Datei-Ebene oder auf der rohen Block-Ebene darunter?</p>
+
+    <div class="card-grid">
+      <div class="card-item blue">
+        <div class="card-label">File-Storage</div>
+        <h4>Fertige Dateien</h4>
+        <p>Der Server verwaltet das Dateisystem. Der Client fragt "gib mir datei.txt" und bekommt sie. Protokolle: SMB, NFS, auch FTP.</p>
+      </div>
+      <div class="card-item yellow">
+        <div class="card-label">Block-Storage</div>
+        <h4>Rohe Bl&ouml;cke</h4>
+        <p>Der Client bekommt nummerierte Bl&ouml;cke, keine Dateien. Das Dateisystem legt er selbst an. Protokolle: iSCSI, Fibre Channel.</p>
+      </div>
+    </div>
+
+    <div class="info-box cyan">
+      <div class="box-label">Alltagsvergleich</div>
+      <p>File-Storage ist ein geteilter Ordner im B&uuml;ro: jeder holt fertige Dokumente raus. Block-Storage ist eine leere externe Festplatte, die dir per Kabel gereicht wird, nur dass das "Kabel" hier das Netzwerk ist. Du formatierst sie selbst und legst dein eigenes Inhaltsverzeichnis an. Der Server auf der anderen Seite wei&szlig; nicht mal, welche Dateien du darauf speicherst.</p>
+    </div>
+
+    <h2>Was ist iSCSI?</h2>
+    <p>iSCSI (Internet Small Computer System Interface) nimmt die Befehle, mit denen ein Betriebssystem normalerweise eine lokale Festplatte anspricht (SCSI-Befehle wie "lies Block 4711"), und schickt sie verpackt in TCP/IP-Pakete &uuml;ber ein normales Ethernet-Netz an einen anderen Rechner. F&uuml;r den Client sieht das Ergebnis aus wie eine ganz normale eingebaute Platte. Dass sie in Wirklichkeit im Netzwerk h&auml;ngt, merkt er nicht.</p>
+
+    <div class="card-grid">
+      <div class="card-item green">
+        <div class="card-label">Initiator</div>
+        <h4>Der Client</h4>
+        <p>Das System, das auf den Speicher zugreift. Es "initiiert" die Verbindung. Beispiel: ein Server, der seine Platte vom Storage holt.</p>
+      </div>
+      <div class="card-item purple">
+        <div class="card-label">Target</div>
+        <h4>Das Ziel</h4>
+        <p>Das System, das den Speicher bereitstellt. Das "Ziel" der Verbindung. Beispiel: ein NAS oder ein Storage-System.</p>
+      </div>
+      <div class="card-item cyan">
+        <div class="card-label">LUN</div>
+        <h4>Die virtuelle Platte</h4>
+        <p>Logical Unit Number. Die einzelne "Festplatte", die das Target rausgibt. Oft eine gro&szlig;e Datei oder ein Volume auf dem Storage.</p>
+      </div>
+      <div class="card-item blue">
+        <div class="card-label">IQN</div>
+        <h4>Die Adresse</h4>
+        <p>iSCSI Qualified Name, z.B. iqn.2026-06.com.beispiel:storage1. Eindeutiger Name, &uuml;ber den sich Initiator und Target ansprechen.</p>
+      </div>
+    </div>
+
+    <div class="info-box blue">
+      <div class="box-label">Wie der Zugriff abl&auml;uft</div>
+      <p>Der Initiator bekommt die IP des Targets, fragt "was hast du f&uuml;r mich?" (Discovery) und verbindet sich mit einer LUN. Danach taucht im Betriebssystem eine neue, leere Platte auf. Die muss erst initialisiert, partitioniert und formatiert werden (z.B. NTFS), genau wie eine frische physische Platte. iSCSI l&auml;uft &uuml;ber TCP auf Port 3260 und geh&ouml;rt aus Performance-Gr&uuml;nden in ein eigenes, getrenntes Netz.</p>
+    </div>
+
+    <h2>NAS vs. SAN: das gr&ouml;&szlig;ere Bild</h2>
+    <p>iSCSI ist ein Protokoll. NAS und SAN sind dagegen Architekturkonzepte, also Bauweisen, wie man Speicher im Netz bereitstellt. Sie liegen auf einer anderen Ebene als iSCSI, und genau hier wird oft durcheinandergeworfen.</p>
+
+    <div class="compare-row">
+      <div class="compare-col good">
+        <div class="col-header">NAS</div>
+        <ul>
+          <li>Network Attached Storage</li>
+          <li>Liefert File-Storage</li>
+          <li>Protokolle: SMB, NFS</li>
+          <li>Client sieht eine Netzwerkfreigabe</li>
+          <li>Dateisystem liegt beim NAS</li>
+        </ul>
+      </div>
+      <div class="compare-col bad">
+        <div class="col-header">SAN</div>
+        <ul>
+          <li>Storage Area Network</li>
+          <li>Liefert Block-Storage</li>
+          <li>Protokolle: iSCSI, Fibre Channel</li>
+          <li>Client sieht eine lokale Festplatte</li>
+          <li>Dateisystem liegt beim Client</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box green">
+      <div class="box-label">Der Zusammenhang</div>
+      <p>iSCSI ist eines der Protokolle, mit denen man ein SAN aufbaut. iSCSI und SAN sind also keine Konkurrenten, sondern iSCSI ist das "Wie" und SAN das "Was". Wichtig: Hinter iSCSI muss nicht zwingend ein gro&szlig;es SAN stecken. Auch ein einzelner Server oder ein NAS kann einem anderen System per iSCSI eine Platte geben.</p>
+    </div>
+
+    <h2>Einordnung auf einen Blick</h2>
+    <table class="data-table">
+      <thead><tr><th></th><th>NAS</th><th>SAN</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Liefert</strong></td><td>Dateien (File-Storage)</td><td>Bl&ouml;cke (Block-Storage)</td></tr>
+        <tr><td><strong>Protokolle</strong></td><td>SMB, NFS</td><td>iSCSI, Fibre Channel</td></tr>
+        <tr><td><strong>Client sieht</strong></td><td>Netzwerkfreigabe / Ordner</td><td>lokale Festplatte</td></tr>
+        <tr><td><strong>Dateisystem liegt</strong></td><td>beim NAS</td><td>beim Client</td></tr>
+        <tr><td><strong>Typischer Einsatz</strong></td><td>geteilte Nutzerlaufwerke</td><td>VM-Speicher, Datenbanken</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box yellow">
+      <div class="box-label">Faustregel</div>
+      <p>iSCSI gibt einem einzelnen System eine exklusive Platte. SMB/NFS geben vielen Nutzern einen geteilten Ordner. Sobald mehrere gleichzeitig auf dieselben Daten zugreifen sollen, ist iSCSI das falsche Werkzeug, denn zwei Systeme, die gleichzeitig auf dieselbe LUN schreiben, zerst&ouml;ren sich das Dateisystem. Deshalb ist iSCSI ein Server- und Infrastruktur-Thema (VM-Speicher, Datenbanken, Backup-Ziele), nicht etwas f&uuml;r normale Arbeitsplatz-Clients.</p>
+    </div>
+
+    <div class="info-box purple">
+      <div class="box-label">F&uuml;r die IHK</div>
+      <p>Den einen Satz solltest du sicher k&ouml;nnen: iSCSI ist ein Block-Storage-Protokoll, mit dem ein Initiator &uuml;ber IP (Port 3260) auf das Target eines SAN zugreift und den bereitgestellten Speicher wie eine lokale Festplatte nutzt. Dazu die Abgrenzung Block- vs. File-Storage und die Einordnung NAS (File) gegen SAN (Block).</p>
+    </div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn-nav" onclick="showPage('m8-nfs-smb')">&#8592; Zur&uuml;ck</button>
       <button class="btn-nav primary" onclick="showPage('m8-quiz')">Weiter: Quiz 8 &#8594;</button>
     </div>
   </div>
@@ -2843,11 +2962,11 @@ showmount -e fileserver
   <div class="page" id="page-m8-quiz">
     <span class="chapter-tag tag-quiz">Modul 08 &middot; Quiz</span>
     <h1>Quiz 8: Netzwerk-Dateisysteme</h1>
-    <p class="lead">6 Fragen zu NFS, SMB und Netzlaufwerken.</p>
+    <p class="lead">8 Fragen zu NFS, SMB, Block-Storage und iSCSI.</p>
     <div class="quiz-container" id="quiz-m8">
 
       <div class="quiz-question" data-q="0">
-        <div class="question-num">Frage 1 von 6</div>
+        <div class="question-num">Frage 1 von 8</div>
         <div class="question-text">Welches Protokoll wird f&uuml;r Windows-Netzwerkfreigaben standardm&auml;&szlig;ig verwendet?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m8',0,'A')"><span class="option-letter">A</span> NFS</button>
@@ -2859,7 +2978,7 @@ showmount -e fileserver
       </div>
 
       <div class="quiz-question" data-q="1">
-        <div class="question-num">Frage 2 von 6</div>
+        <div class="question-num">Frage 2 von 8</div>
         <div class="question-text">Was ist Samba?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m8',1,'A')"><span class="option-letter">A</span> Ein Linux-Dateisystem</button>
@@ -2871,7 +2990,7 @@ showmount -e fileserver
       </div>
 
       <div class="quiz-question" data-q="2">
-        <div class="question-num">Frage 3 von 6</div>
+        <div class="question-num">Frage 3 von 8</div>
         <div class="question-text">Wie lautet der korrekte UNC-Pfad um auf die Freigabe "projekte" auf dem Server "srv01" zuzugreifen?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m8',2,'A')"><span class="option-letter">A</span> <code style="font-family:'DM Mono',monospace">http://srv01/projekte</code></button>
@@ -2883,7 +3002,7 @@ showmount -e fileserver
       </div>
 
       <div class="quiz-question" data-q="3">
-        <div class="question-num">Frage 4 von 6</div>
+        <div class="question-num">Frage 4 von 8</div>
         <div class="question-text">Welcher Dateisystemtyp wird in /etc/fstab f&uuml;r eine SMB-Freigabe angegeben?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m8',3,'A')"><span class="option-letter">A</span> smb</button>
@@ -2895,7 +3014,7 @@ showmount -e fileserver
       </div>
 
       <div class="quiz-question" data-q="4">
-        <div class="question-num">Frage 5 von 6</div>
+        <div class="question-num">Frage 5 von 8</div>
         <div class="question-text">Du hast ein reines Linux-Netzwerk und willst Verzeichnisse zwischen Servern teilen. Welches Protokoll ist die naheliegendste Wahl?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m8',4,'A')"><span class="option-letter">A</span> SMB</button>
@@ -2907,15 +3026,39 @@ showmount -e fileserver
       </div>
 
       <div class="quiz-question" data-q="5">
-        <div class="question-num">Frage 6 von 6</div>
+        <div class="question-num">Frage 6 von 8</div>
         <div class="question-text">Was bedeutet die Option <code style="font-family:'DM Mono',monospace">_netdev</code> in einem /etc/fstab-Eintrag?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'A')"><span class="option-letter">A</span> Die Freigabe wird nur f&uuml;r bestimmte Benutzer gemountet</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'B')"><span class="option-letter">B</span> Das Dateisystem wird erst gemountet wenn das Netzwerk verf&uuml;gbar ist</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'C')"><span class="option-letter">C</span> Die Verbindung ist verschl&uuml;sselt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'D')"><span class="option-letter">D</span> Das Ger&auml;t ist ein Netzwerkdrucker</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'A')"><span class="option-letter">A</span> Mounten nur f&uuml;r bestimmte Benutzer erlaubt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'B')"><span class="option-letter">B</span> Mounten erst nachdem das Netzwerk verf&uuml;gbar ist</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'C')"><span class="option-letter">C</span> Verbindung wird automatisch verschl&uuml;sselt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',5,'D')"><span class="option-letter">D</span> Ger&auml;t wird als Netzwerkdrucker behandelt</button>
         </div>
         <div class="quiz-feedback" id="fb-m8-5"></div>
+      </div>
+
+      <div class="quiz-question" data-q="6">
+        <div class="question-num">Frage 7 von 8</div>
+        <div class="question-text">Worin unterscheidet sich iSCSI grunds&auml;tzlich von SMB und NFS?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'A')"><span class="option-letter">A</span> iSCSI liefert Bl&ouml;cke statt fertiger Dateien</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'B')"><span class="option-letter">B</span> iSCSI funktioniert nur ohne ein Netzwerk</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'C')"><span class="option-letter">C</span> iSCSI ist nur f&uuml;r Arbeitsplatz-Clients gedacht</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'D')"><span class="option-letter">D</span> iSCSI braucht kein Dateisystem auf der Platte</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m8-6"></div>
+      </div>
+
+      <div class="quiz-question" data-q="7">
+        <div class="question-num">Frage 8 von 8</div>
+        <div class="question-text">Wie h&auml;ngen iSCSI und SAN zusammen?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'A')"><span class="option-letter">A</span> SAN ist ein neuerer Ersatz f&uuml;r iSCSI</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'B')"><span class="option-letter">B</span> iSCSI ist ein Protokoll, um ein SAN aufzubauen</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'C')"><span class="option-letter">C</span> SAN und iSCSI sind exakt dasselbe</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'D')"><span class="option-letter">D</span> iSCSI ersetzt jedes SAN vollst&auml;ndig</button>
+        </div>
+        <div class="quiz-feedback" id="fb-m8-7"></div>
       </div>
 
       <div class="quiz-result" id="result-m8">
@@ -2997,7 +3140,7 @@ const PAGE_ORDER = [
   'm5-formate','m5-komprimierung','m5-deployment','m5-quiz',
   'm6-linux','m6-windows','m6-quiz',
   'm7-mime','m7-base64','m7-quiz',
-  'm8-nfs-smb','m8-quiz',
+  'm8-nfs-smb','m8-blockstorage','m8-quiz',
   'final-quiz'
 ];
 
@@ -3027,6 +3170,7 @@ const BREADCRUMBS = {
   'm7-base64': 'Modul 7 · Base64',
   'm7-quiz': 'Modul 7 · Quiz',
   'm8-nfs-smb': 'Modul 8 · NFS & SMB',
+  'm8-blockstorage': 'Modul 8 · Block-Storage & iSCSI',
   'm8-quiz': 'Modul 8 · Quiz',
   'final-quiz': 'Gesamtquiz'
 };
@@ -3545,7 +3689,7 @@ QUIZ_DATA.m6 = {
 };
 
 QUIZ_DATA.m8 = {
-  correct: ['B','B','C','D','C','B'],
+  correct: ['B','B','C','D','C','B','A','B'],
   feedback: [
     { correct: "Richtig. SMB (Server Message Block) ist das Standard-Protokoll f\u00fcr Windows-Netzwerkfreigaben. Die Linux-Implementierung davon hei\u00dft Samba.",
       wrong: "Falsch. NFS ist das Unix/Linux-Protokoll. FTP und HTTP sind keine Dateisystem-Protokolle f\u00fcr Netzwerkfreigaben. SMB ist der Windows-Standard." },
@@ -3558,7 +3702,11 @@ QUIZ_DATA.m8 = {
     { correct: "Richtig. NFS ist das native Unix/Linux-Protokoll f\u00fcr Dateifreigaben. In einem reinen Linux-Netzwerk ist NFS die einfachste und performanteste Wahl.",
       wrong: "Falsch. SMB ist prim\u00e4r f\u00fcr Windows-Netzwerke. FTP und HTTP sind keine Dateisystem-Protokolle die man mounten kann. NFS ist der Linux-Standard." },
     { correct: "Richtig. _netdev weist das System an, dieses Dateisystem erst zu mounten nachdem das Netzwerk verf\u00fcgbar ist. Ohne diese Option k\u00f6nnte das System beim Booten h\u00e4ngen weil es versucht eine Netzwerkfreigabe zu mounten bevor das Netzwerk bereit ist.",
-      wrong: "Falsch. _netdev hat nichts mit Benutzern, Verschl\u00fcsselung oder Druckern zu tun. Es steuert ausschlie\u00dflich den Zeitpunkt des Mountens: erst nach Netzwerkverf\u00fcgbarkeit." }
+      wrong: "Falsch. _netdev hat nichts mit Benutzern, Verschl\u00fcsselung oder Druckern zu tun. Es steuert ausschlie\u00dflich den Zeitpunkt des Mountens: erst nach Netzwerkverf\u00fcgbarkeit." },
+    { correct: "Richtig. iSCSI ist Block-Storage: der Client bekommt rohe, nummerierte Bl\u00f6cke und legt das Dateisystem selbst an. SMB und NFS sind File-Storage und liefern fertige Dateien.",
+      wrong: "Falsch. iSCSI braucht ein Netzwerk (es l\u00e4uft \u00fcber TCP/IP, Port 3260) und ist gerade kein Client-Thema, sondern f\u00fcr Server. Auf der \u00fcbertragenen Platte wird sehr wohl ein Dateisystem angelegt, nur vom Client. Der echte Unterschied ist die Ebene: Bl\u00f6cke statt Dateien." },
+    { correct: "Richtig. iSCSI ist ein Protokoll, mit dem man ein SAN aufbaut. iSCSI ist das 'Wie' (die Technik), SAN das 'Was' (die Architektur). Sie sind keine Konkurrenten.",
+      wrong: "Falsch. iSCSI und SAN sind weder dasselbe noch ein Ersatz f\u00fcreinander. SAN ist die Architektur, iSCSI eines der Protokolle, mit denen man sie umsetzt (neben Fibre Channel)." }
   ]
 };
 
