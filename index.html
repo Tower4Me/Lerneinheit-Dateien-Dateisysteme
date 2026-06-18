@@ -938,7 +938,7 @@ Wert:    128 +  0 + 32 + 16 +  0 +  0 +  2 +  0  =  <span class="num">178</span>
         <div class="question-text">Was ist der Dezimalwert von <code style="font-family:'DM Mono',monospace">0xFF</code>?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="selectOpt(this,'m1',3,'A')"><span class="option-letter">A</span> 15</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'B')"><span class="option-letter">C</span> 240</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',3,'B')"><span class="option-letter">B</span> 240</button>
           <button class="quiz-option" onclick="selectOpt(this,'m1',3,'C')"><span class="option-letter">C</span> 255</button>
           <button class="quiz-option" onclick="selectOpt(this,'m1',3,'D')"><span class="option-letter">D</span> 256</button>
         </div>
@@ -949,10 +949,10 @@ Wert:    128 +  0 + 32 + 16 +  0 +  0 +  2 +  0  =  <span class="num">178</span>
         <div class="question-num">Frage 5 von 6</div>
         <div class="question-text">Eine Festplatte wird mit "1 TB" beworben, Windows zeigt aber nur ~931 GB an. Was ist die Ursache?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'A')"><span class="option-letter">A</span> Die Festplatte ist defekt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'B')"><span class="option-letter">B</span> Hersteller nutzen Dezimal (1 TB = 10<sup>12</sup> Byte), Windows zeigt bin&auml;re GiB (1 GiB = 2<sup>30</sup> Byte)</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'C')"><span class="option-letter">C</span> Windows rechnet falsch</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'D')"><span class="option-letter">D</span> Der Rest ist f&uuml;r das Dateisystem reserviert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'A')"><span class="option-letter">A</span> Die Festplatte ist ab Werk teilweise defekt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'B')"><span class="option-letter">B</span> Hersteller rechnen dezimal, Windows bin&auml;r</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'C')"><span class="option-letter">C</span> Windows rechnet die Kapazit&auml;t schlicht falsch</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m1',4,'D')"><span class="option-letter">D</span> Der fehlende Platz ist komplett fürs Dateisystem reserviert</button>
         </div>
         <div class="quiz-feedback" id="fb-m1-4"></div>
       </div>
@@ -1369,10 +1369,10 @@ UUID=1A2B-3C4D       /mnt/usb      vfat    auto,user       0     0
         <div class="question-num">Frage 1 von 7</div>
         <div class="question-text">Was sind Metadaten einer Datei?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'A')"><span class="option-letter">A</span> Der Inhalt der Datei, z.B. der Text in einem Dokument</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'B')"><span class="option-letter">B</span> Informationen &uuml;ber die Datei wie Name, Gr&ouml;&szlig;e, Zeitstempel und Berechtigungen</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'C')"><span class="option-letter">C</span> Eine verschl&uuml;sselte Kopie der Datei</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'D')"><span class="option-letter">D</span> Die Dateiendung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'A')"><span class="option-letter">A</span> Der eigentliche Inhalt, also z.B. der Text in einem Dokument</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'B')"><span class="option-letter">B</span> Verwaltungsinfos wie Name, Gr&ouml;&szlig;e und Zeitstempel</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'C')"><span class="option-letter">C</span> Eine automatisch verschl&uuml;sselte Sicherungskopie der Datei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',0,'D')"><span class="option-letter">D</span> Ausschlie&szlig;lich die Dateiendung am Namensende</button>
         </div>
         <div class="quiz-feedback" id="fb-m2-0"></div>
       </div>
@@ -1381,10 +1381,10 @@ UUID=1A2B-3C4D       /mnt/usb      vfat    auto,user       0     0
         <div class="question-num">Frage 2 von 7</div>
         <div class="question-text">Du hast eine Datei namens <code style="font-family:'DM Mono',monospace">bild.jpg</code> und benennst sie in <code style="font-family:'DM Mono',monospace">bild.txt</code> um. Was passiert mit dem Inhalt?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'A')"><span class="option-letter">A</span> Der Inhalt wird automatisch in Text umgewandelt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'B')"><span class="option-letter">B</span> Die Datei wird besch&auml;digt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'C')"><span class="option-letter">C</span> Der Inhalt bleibt unver&auml;ndert, nur der Hinweis f&uuml;r das OS &auml;ndert sich</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'D')"><span class="option-letter">D</span> Das Betriebssystem verhindert die Umbenennung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'A')"><span class="option-letter">A</span> Der Inhalt wird automatisch in echten Text umgewandelt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'B')"><span class="option-letter">B</span> Die Datei wird durch die Umbenennung besch&auml;digt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'C')"><span class="option-letter">C</span> Der Inhalt bleibt gleich, nur der OS-Hinweis &auml;ndert sich</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',1,'D')"><span class="option-letter">D</span> Das Betriebssystem blockiert die Umbenennung komplett</button>
         </div>
         <div class="quiz-feedback" id="fb-m2-1"></div>
       </div>
@@ -1405,10 +1405,10 @@ UUID=1A2B-3C4D       /mnt/usb      vfat    auto,user       0     0
         <div class="question-num">Frage 4 von 7</div>
         <div class="question-text">Was ist Journaling in einem Dateisystem?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'A')"><span class="option-letter">A</span> Eine Methode um Dateien zu komprimieren</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'B')"><span class="option-letter">B</span> Ein Protokoll das &Auml;nderungen vor der Ausf&uuml;hrung aufzeichnet damit nach einem Absturz der konsistente Zustand wiederhergestellt werden kann</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'C')"><span class="option-letter">C</span> Eine Art Backup das automatisch erstellt wird</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'D')"><span class="option-letter">D</span> Die Verschl&uuml;sselung von Metadaten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'A')"><span class="option-letter">A</span> Ein Verfahren, um Dateien platzsparend zu komprimieren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'B')"><span class="option-letter">B</span> Ein Protokoll geplanter &Auml;nderungen f&uuml;r Absturzsicherheit</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'C')"><span class="option-letter">C</span> Eine Art Backup, das im Hintergrund automatisch entsteht</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',3,'D')"><span class="option-letter">D</span> Die laufende Verschl&uuml;sselung aller Metadaten</button>
         </div>
         <div class="quiz-feedback" id="fb-m2-3"></div>
       </div>
@@ -1429,10 +1429,10 @@ UUID=1A2B-3C4D       /mnt/usb      vfat    auto,user       0     0
         <div class="question-num">Frage 6 von 7</div>
         <div class="question-text">Warum k&ouml;nnen gel&ouml;schte Dateien oft wiederhergestellt werden?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'A')"><span class="option-letter">A</span> Windows erstellt automatisch eine Sicherungskopie</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'B')"><span class="option-letter">B</span> Beim L&ouml;schen wird nur der Inode/MFT-Eintrag als frei markiert, die eigentlichen Dateidaten bleiben bis zum &Uuml;berschreiben erhalten</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'C')"><span class="option-letter">C</span> Dateien werden beim L&ouml;schen verschl&uuml;sselt statt gel&ouml;scht</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'D')"><span class="option-letter">D</span> Das Dateisystem beh&auml;lt immer die letzten 10 gel&ouml;schten Dateien</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'A')"><span class="option-letter">A</span> Windows legt vor dem L&ouml;schen automatisch eine Kopie an</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'B')"><span class="option-letter">B</span> Nur der Verzeichniseintrag wird freigegeben, die Daten bleiben</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'C')"><span class="option-letter">C</span> Dateien werden beim L&ouml;schen nur verschl&uuml;sselt, nicht entfernt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m2',5,'D')"><span class="option-letter">D</span> Das Dateisystem h&auml;lt stets die letzten zehn gel&ouml;schten Dateien vor</button>
         </div>
         <div class="quiz-feedback" id="fb-m2-5"></div>
       </div>
@@ -1728,10 +1728,10 @@ Zeile 3</textarea>
         <div class="question-num">Frage 6 von 7</div>
         <div class="question-text">Ein Shell-Skript wurde unter Windows erstellt und l&auml;uft unter Linux nicht. Du siehst <code style="font-family:'DM Mono',monospace">^M</code> am Zeilenende. Was ist das wahrscheinlichste Problem?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'A')"><span class="option-letter">A</span> Das Skript hat Syntaxfehler im Bash-Code</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'B')"><span class="option-letter">B</span> Windows-Zeilenenden (CRLF) statt Linux-Zeilenenden (LF) &ndash; das CR wird als Teil des Befehls interpretiert</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'C')"><span class="option-letter">C</span> Die Datei ist in UTF-16 statt UTF-8 kodiert</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'D')"><span class="option-letter">D</span> Linux unterst&uuml;tzt keine .sh-Dateien die unter Windows erstellt wurden</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'A')"><span class="option-letter">A</span> Das Skript enth&auml;lt echte Syntaxfehler im Bash-Code</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'B')"><span class="option-letter">B</span> Windows-Zeilenenden (CRLF), das CR st&ouml;rt den Befehl</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'C')"><span class="option-letter">C</span> Die Datei ist versehentlich in UTF-16 statt UTF-8 kodiert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m3',5,'D')"><span class="option-letter">D</span> Linux f&uuml;hrt keine .sh-Dateien aus, die unter Windows entstanden</button>
         </div>
         <div class="quiz-feedback" id="fb-m3-5"></div>
       </div>
@@ -1875,10 +1875,10 @@ file datei.xyz
         <div class="question-num">Frage 1 von 6</div>
         <div class="question-text">Was sind Magic Bytes und wozu dienen sie?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'A')"><span class="option-letter">A</span> Verschl&uuml;sselungsschl&uuml;ssel die beim &Ouml;ffnen einer Datei gepr&uuml;ft werden</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'B')"><span class="option-letter">B</span> Eine eindeutige Byte-Signatur am Dateianfang die den echten Dateityp anzeigt, unabh&auml;ngig von der Endung</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'C')"><span class="option-letter">C</span> Zuf&auml;llige Bytes die das Betriebssystem am Dateianfang einf&uuml;gt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'D')"><span class="option-letter">D</span> Die Dateiendung in Bin&auml;rform gespeichert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'A')"><span class="option-letter">A</span> Schl&uuml;ssel, die beim &Ouml;ffnen einer Datei gepr&uuml;ft werden</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'B')"><span class="option-letter">B</span> Eine Byte-Signatur am Anfang, die den echten Typ verr&auml;t</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'C')"><span class="option-letter">C</span> Zufallsbytes, die das OS vorne an jede Datei anf&uuml;gt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',0,'D')"><span class="option-letter">D</span> Die Dateiendung, bin&auml;r in der Datei gespeichert</button>
         </div>
         <div class="quiz-feedback" id="fb-m4-0"></div>
       </div>
@@ -1887,10 +1887,10 @@ file datei.xyz
         <div class="question-num">Frage 2 von 6</div>
         <div class="question-text">Du &ouml;ffnest eine JPEG-Datei im Texteditor und siehst unleserliche Zeichen. Was ist die Ursache?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'A')"><span class="option-letter">A</span> Die Datei ist besch&auml;digt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'B')"><span class="option-letter">B</span> Der Texteditor unterst&uuml;tzt keine Bilder</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'C')"><span class="option-letter">C</span> Die Bin&auml;r-Bytes der JPEG-Datei sind keine g&uuml;ltigen Text-Zeichen &ndash; der Editor zeigt sie trotzdem an, falsch interpretiert</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'D')"><span class="option-letter">D</span> Das Betriebssystem blockiert den Zugriff</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'A')"><span class="option-letter">A</span> Die JPEG-Datei ist offensichtlich besch&auml;digt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'B')"><span class="option-letter">B</span> Der Texteditor kann grunds&auml;tzlich keine Bilder &ouml;ffnen</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'C')"><span class="option-letter">C</span> Die Bin&auml;r-Bytes sind keine Text-Zeichen, falsch interpretiert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',1,'D')"><span class="option-letter">D</span> Das Betriebssystem blockiert den Zugriff auf die Datei</button>
         </div>
         <div class="quiz-feedback" id="fb-m4-1"></div>
       </div>
@@ -1911,10 +1911,10 @@ file datei.xyz
         <div class="question-num">Frage 4 von 6</div>
         <div class="question-text">Was zeigt ein Hex-Dump einer Datei an?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'A')"><span class="option-letter">A</span> Den Dateinamen und die Metadaten</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'B')"><span class="option-letter">B</span> Den rohen Inhalt der Datei als Hexadezimalwerte, Byte f&uuml;r Byte</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'C')"><span class="option-letter">C</span> Nur die ersten Bytes einer Datei</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'D')"><span class="option-letter">D</span> Die Dateigr&ouml;&szlig;e in Hexadezimal</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'A')"><span class="option-letter">A</span> Den Dateinamen samt allen Metadaten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'B')"><span class="option-letter">B</span> Den rohen Inhalt als Hex-Werte, Byte f&uuml;r Byte</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'C')"><span class="option-letter">C</span> Ausschlie&szlig;lich die ersten Bytes der Datei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',3,'D')"><span class="option-letter">D</span> Die Dateigr&ouml;&szlig;e, in Hexadezimal angegeben</button>
         </div>
         <div class="quiz-feedback" id="fb-m4-3"></div>
       </div>
@@ -1935,10 +1935,10 @@ file datei.xyz
         <div class="question-num">Frage 6 von 6</div>
         <div class="question-text">Eine .docx-Datei hat die Magic Bytes 50 4B 03 04 &ndash; dieselben wie eine ZIP-Datei. Was bedeutet das?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'A')"><span class="option-letter">A</span> Die Datei ist besch&auml;digt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'B')"><span class="option-letter">B</span> Es handelt sich um einen Zufall</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'C')"><span class="option-letter">C</span> Eine .docx-Datei ist intern ein ZIP-Archiv mit XML-Dateien &ndash; du kannst sie in .zip umbenennen und entpacken</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'D')"><span class="option-letter">D</span> Word-Dokumente werden vor dem Speichern komprimiert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'A')"><span class="option-letter">A</span> Die docx-Datei ist in Wahrheit besch&auml;digt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'B')"><span class="option-letter">B</span> Es ist reiner Zufall, dass die Bytes gleich sind</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'C')"><span class="option-letter">C</span> Eine .docx ist intern ein ZIP-Archiv mit XML-Dateien</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m4',5,'D')"><span class="option-letter">D</span> Word komprimiert jedes Dokument vor dem Speichern</button>
         </div>
         <div class="quiz-feedback" id="fb-m4-5"></div>
       </div>
@@ -2220,10 +2220,10 @@ dism /Mount-Image /ImageFile:install.wim /Index:1 /MountDir:C:\mount</div>
         <div class="question-num">Frage 2 von 7</div>
         <div class="question-text">Was ist der Unterschied zwischen einem Video-Container und einem Codec?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'A')"><span class="option-letter">A</span> Es gibt keinen Unterschied, beide bezeichnen dasselbe</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'B')"><span class="option-letter">B</span> Der Container ist das Dateiformat (.mp4, .mkv), der Codec das Komprimierungsverfahren (H.264, H.265)</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'C')"><span class="option-letter">C</span> Der Codec ist das Dateiformat, der Container die Videospur</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'D')"><span class="option-letter">D</span> Container sind nur f&uuml;r Audio, Codecs nur f&uuml;r Video</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'A')"><span class="option-letter">A</span> Es gibt keinen Unterschied, das ist dasselbe</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'B')"><span class="option-letter">B</span> Container ist das Dateiformat, Codec das Komprimierungsverfahren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'C')"><span class="option-letter">C</span> Der Codec ist das Dateiformat, der Container nur die Bildspur</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',1,'D')"><span class="option-letter">D</span> Container gelten nur f&uuml;r Audio, Codecs nur f&uuml;r Video</button>
         </div>
         <div class="quiz-feedback" id="fb-m5-1"></div>
       </div>
@@ -2244,10 +2244,10 @@ dism /Mount-Image /ImageFile:install.wim /Index:1 /MountDir:C:\mount</div>
         <div class="question-num">Frage 4 von 7</div>
         <div class="question-text">Du bearbeitest ein Foto und speicherst es mehrfach als JPEG. Was passiert mit der Qualit&auml;t?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'A')"><span class="option-letter">A</span> Nichts &ndash; JPEG speichert verlustfrei</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'B')"><span class="option-letter">B</span> Die Qualit&auml;t verbessert sich durch erneutes Komprimieren</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'C')"><span class="option-letter">C</span> Die Qualit&auml;t nimmt bei jedem Speichern ab weil jedes Mal neue Informationen verloren gehen (Generation Loss)</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'D')"><span class="option-letter">D</span> Die Datei wird gr&ouml;&szlig;er aber die Qualit&auml;t bleibt gleich</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'A')"><span class="option-letter">A</span> Nichts, denn JPEG speichert grunds&auml;tzlich verlustfrei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'B')"><span class="option-letter">B</span> Die Qualit&auml;t wird durch erneutes Komprimieren besser</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'C')"><span class="option-letter">C</span> Die Qualit&auml;t sinkt bei jedem Speichern (Generation Loss)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',3,'D')"><span class="option-letter">D</span> Die Datei wird gr&ouml;&szlig;er, die Qualit&auml;t bleibt aber gleich</button>
         </div>
         <div class="quiz-feedback" id="fb-m5-3"></div>
       </div>
@@ -2256,10 +2256,10 @@ dism /Mount-Image /ImageFile:install.wim /Index:1 /MountDir:C:\mount</div>
         <div class="question-num">Frage 5 von 7</div>
         <div class="question-text">Was ist eine .tar.gz Datei?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'A')"><span class="option-letter">A</span> Eine verschl&uuml;sselte ZIP-Datei</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'B')"><span class="option-letter">B</span> Eine Videodatei mit zwei Tonspuren</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'C')"><span class="option-letter">C</span> Ein TAR-Archiv (zusammengepackte Dateien) das zus&auml;tzlich mit Gzip komprimiert wurde</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'D')"><span class="option-letter">D</span> Ein Linux-Backup-Format mit automatischer Wiederherstellung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'A')"><span class="option-letter">A</span> Eine mit Passwort verschl&uuml;sselte ZIP-Datei</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'B')"><span class="option-letter">B</span> Eine Videodatei mit gleich zwei Tonspuren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'C')"><span class="option-letter">C</span> Ein TAR-Archiv, das zus&auml;tzlich mit Gzip komprimiert ist</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',4,'D')"><span class="option-letter">D</span> Ein Linux-Backupformat mit automatischer Wiederherstellung</button>
         </div>
         <div class="quiz-feedback" id="fb-m5-4"></div>
       </div>
@@ -2280,10 +2280,10 @@ dism /Mount-Image /ImageFile:install.wim /Index:1 /MountDir:C:\mount</div>
         <div class="question-num">Frage 7 von 7</div>
         <div class="question-text">Warum l&auml;sst sich eine bereits komprimierte ZIP-Datei kaum noch weiter komprimieren?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'A')"><span class="option-letter">A</span> Weil ZIP eine maximale Gr&ouml;&szlig;e hat</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'B')"><span class="option-letter">B</span> Weil komprimierte Daten kaum noch Muster und Wiederholungen enthalten, die Komprimierungsalgorithmen ausnutzen k&ouml;nnten</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'C')"><span class="option-letter">C</span> Weil ZIP-Dateien einen Schreibschutz haben</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'D')"><span class="option-letter">D</span> Weil das Betriebssystem verschachtelte Archive verhindert</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'A')"><span class="option-letter">A</span> Weil ZIP-Dateien eine fixe maximale Gr&ouml;&szlig;e haben</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'B')"><span class="option-letter">B</span> Weil komprimierte Daten kaum noch nutzbare Muster enthalten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'C')"><span class="option-letter">C</span> Weil ZIP-Dateien einen eingebauten Schreibschutz tragen</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m5',6,'D')"><span class="option-letter">D</span> Weil das Betriebssystem doppelt gepackte Archive verbietet</button>
         </div>
         <div class="quiz-feedback" id="fb-m5-6"></div>
       </div>
@@ -2468,10 +2468,10 @@ icacls datei.txt /grant Administratoren:(F)</div>
         <div class="question-num">Frage 2 von 6</div>
         <div class="question-text">Du siehst bei <code style="font-family:'DM Mono',monospace">ls -l</code> die Ausgabe <code style="font-family:'DM Mono',monospace">drwxr-xr-x</code>. Was zeigt das erste Zeichen 'd' an?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'A')"><span class="option-letter">A</span> Die Datei ist verschl&uuml;sselt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'B')"><span class="option-letter">B</span> Es handelt sich um ein Verzeichnis (Directory)</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'C')"><span class="option-letter">C</span> Die Datei wurde gel&ouml;scht</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'D')"><span class="option-letter">D</span> Der Eigent&uuml;mer hat Delete-Rechte</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'A')"><span class="option-letter">A</span> Das Objekt ist verschl&uuml;sselt abgelegt</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'B')"><span class="option-letter">B</span> Es ist ein Verzeichnis (Directory)</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'C')"><span class="option-letter">C</span> Das Objekt wurde bereits gel&ouml;scht</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',1,'D')"><span class="option-letter">D</span> Der Eigent&uuml;mer besitzt Delete-Rechte</button>
         </div>
         <div class="quiz-feedback" id="fb-m6-1"></div>
       </div>
@@ -2492,10 +2492,10 @@ icacls datei.txt /grant Administratoren:(F)</div>
         <div class="question-num">Frage 4 von 6</div>
         <div class="question-text">Was unterscheidet Windows ACL grundlegend vom Linux rwx-System?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'A')"><span class="option-letter">A</span> Windows hat kein Berechtigungssystem</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'B')"><span class="option-letter">B</span> ACL erlaubt beliebig viele Eintr&auml;ge pro Benutzer/Gruppe mit feingranularen Rechten und explizitem Verbot (Deny)</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'C')"><span class="option-letter">C</span> Linux kann keine Berechtigungen f&uuml;r Gruppen setzen</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'D')"><span class="option-letter">D</span> Windows ACL funktioniert nur auf NTFS-Partitionen aber nicht auf Dateien</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'A')"><span class="option-letter">A</span> Windows besitzt gar kein Berechtigungssystem</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'B')"><span class="option-letter">B</span> ACL erlaubt viele feingranulare Eintr&auml;ge samt Deny</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'C')"><span class="option-letter">C</span> Linux kann keinerlei Rechte f&uuml;r Gruppen vergeben</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m6',3,'D')"><span class="option-letter">D</span> Windows ACL greift nur auf NTFS, nicht auf einzelne Dateien</button>
         </div>
         <div class="quiz-feedback" id="fb-m6-3"></div>
       </div>
@@ -2686,10 +2686,10 @@ echo -n "Hallo Welt" | base64
         <div class="question-num">Frage 3 von 6</div>
         <div class="question-text">Was ist Base64?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'A')"><span class="option-letter">A</span> Ein Verschl&uuml;sselungsverfahren mit 64-Bit-Schl&uuml;ssel</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'B')"><span class="option-letter">B</span> Ein Komprimierungsformat f&uuml;r Bin&auml;rdaten</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'C')"><span class="option-letter">C</span> Eine Kodierungsmethode die Bin&auml;rdaten in 64 druckbare ASCII-Zeichen umwandelt</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'D')"><span class="option-letter">D</span> Ein Dateiformat f&uuml;r gro&szlig;e Bin&auml;rdateien</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'A')"><span class="option-letter">A</span> Ein Verschl&uuml;sselungsverfahren mit einem 64-Bit-Schl&uuml;ssel</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'B')"><span class="option-letter">B</span> Ein Komprimierungsformat speziell f&uuml;r Bin&auml;rdaten</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'C')"><span class="option-letter">C</span> Eine Kodierung von Bin&auml;rdaten in druckbare ASCII-Zeichen</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',2,'D')"><span class="option-letter">D</span> Ein eigenes Dateiformat f&uuml;r gro&szlig;e Bin&auml;rdateien</button>
         </div>
         <div class="quiz-feedback" id="fb-m7-2"></div>
       </div>
@@ -2710,10 +2710,10 @@ echo -n "Hallo Welt" | base64
         <div class="question-num">Frage 5 von 6</div>
         <div class="question-text">Du findest in einem Code-Repository ein Base64-kodiertes Passwort. Ist es sicher?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'A')"><span class="option-letter">A</span> Ja, Base64 ist eine Verschl&uuml;sselung</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'B')"><span class="option-letter">B</span> Ja, aber nur wenn es l&auml;nger als 32 Zeichen ist</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'C')"><span class="option-letter">C</span> Nein, Base64 ist keine Verschl&uuml;sselung und kann sofort dekodiert werden</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'D')"><span class="option-letter">D</span> Ja, weil Repositories privat sind</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'A')"><span class="option-letter">A</span> Ja, denn Base64 ist eine echte Verschl&uuml;sselung</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'B')"><span class="option-letter">B</span> Ja, aber nur bei mehr als 32 Zeichen L&auml;nge</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'C')"><span class="option-letter">C</span> Nein, Base64 l&auml;sst sich sofort wieder dekodieren</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m7',4,'D')"><span class="option-letter">D</span> Ja, weil das Repository ohnehin privat ist</button>
         </div>
         <div class="quiz-feedback" id="fb-m7-4"></div>
       </div>
@@ -2813,6 +2813,11 @@ showmount -e fileserver
 
 <span class="cm"># NFS-Exporte konfigurieren (auf dem Server, /etc/exports)</span>
 /srv/daten  192.168.1.0/24(rw,sync,no_subtree_check)</span></div>
+
+    <div class="info-box yellow">
+      <div class="box-label">Die Option _netdev</div>
+      <p>Bei Netzwerkfreigaben in der <code style="font-family:'DM Mono',monospace">/etc/fstab</code> setzt man die Option <code style="font-family:'DM Mono',monospace">_netdev</code>. Sie sagt dem System: dieses Dateisystem erst mounten, nachdem das Netzwerk verf&uuml;gbar ist. Ohne sie kann der Bootvorgang h&auml;ngen, weil das System versucht, eine Freigabe zu mounten, bevor &uuml;berhaupt eine Netzwerkverbindung steht.</p>
+    </div>
 
     <h2>SMB vs. NFS auf einen Blick</h2>
     <table class="data-table">
@@ -2981,10 +2986,10 @@ showmount -e fileserver
         <div class="question-num">Frage 2 von 8</div>
         <div class="question-text">Was ist Samba?</div>
         <div class="quiz-options">
-          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'A')"><span class="option-letter">A</span> Ein Linux-Dateisystem</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'B')"><span class="option-letter">B</span> Die Open-Source-Implementierung von SMB f&uuml;r Linux</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'C')"><span class="option-letter">C</span> Ein NFS-Client f&uuml;r Windows</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'D')"><span class="option-letter">D</span> Ein Backup-Protokoll</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'A')"><span class="option-letter">A</span> Ein eigenes Linux-Dateisystem</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'B')"><span class="option-letter">B</span> Die Linux-Implementierung von SMB</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'C')"><span class="option-letter">C</span> Ein NFS-Client speziell f&uuml;r Windows</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',1,'D')"><span class="option-letter">D</span> Ein Protokoll f&uuml;r Backups</button>
         </div>
         <div class="quiz-feedback" id="fb-m8-1"></div>
       </div>
@@ -3044,7 +3049,7 @@ showmount -e fileserver
           <button class="quiz-option" onclick="selectOpt(this,'m8',6,'A')"><span class="option-letter">A</span> iSCSI liefert Bl&ouml;cke statt fertiger Dateien</button>
           <button class="quiz-option" onclick="selectOpt(this,'m8',6,'B')"><span class="option-letter">B</span> iSCSI funktioniert nur ohne ein Netzwerk</button>
           <button class="quiz-option" onclick="selectOpt(this,'m8',6,'C')"><span class="option-letter">C</span> iSCSI ist nur f&uuml;r Arbeitsplatz-Clients gedacht</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'D')"><span class="option-letter">D</span> iSCSI braucht kein Dateisystem auf der Platte</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',6,'D')"><span class="option-letter">D</span> Beim Client liegt am Ende keine Festplatte vor</button>
         </div>
         <div class="quiz-feedback" id="fb-m8-6"></div>
       </div>
@@ -3056,7 +3061,7 @@ showmount -e fileserver
           <button class="quiz-option" onclick="selectOpt(this,'m8',7,'A')"><span class="option-letter">A</span> SAN ist ein neuerer Ersatz f&uuml;r iSCSI</button>
           <button class="quiz-option" onclick="selectOpt(this,'m8',7,'B')"><span class="option-letter">B</span> iSCSI ist ein Protokoll, um ein SAN aufzubauen</button>
           <button class="quiz-option" onclick="selectOpt(this,'m8',7,'C')"><span class="option-letter">C</span> SAN und iSCSI sind exakt dasselbe</button>
-          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'D')"><span class="option-letter">D</span> iSCSI ersetzt jedes SAN vollst&auml;ndig</button>
+          <button class="quiz-option" onclick="selectOpt(this,'m8',7,'D')"><span class="option-letter">D</span> Hinter iSCSI steckt immer ein gro&szlig;es SAN</button>
         </div>
         <div class="quiz-feedback" id="fb-m8-7"></div>
       </div>
@@ -3080,25 +3085,25 @@ showmount -e fileserver
 
       <div class="quiz-question" data-q="0"><div class="question-num">Frage 1 von 20</div><div class="question-text">Wie viele verschiedene Werte kann ein Byte darstellen?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',0,'A')"><span class="option-letter">A</span> 8</button><button class="quiz-option" onclick="selectOpt(this,'final',0,'B')"><span class="option-letter">B</span> 128</button><button class="quiz-option" onclick="selectOpt(this,'final',0,'C')"><span class="option-letter">C</span> 256</button><button class="quiz-option" onclick="selectOpt(this,'final',0,'D')"><span class="option-letter">D</span> 1024</button></div><div class="quiz-feedback" id="fb-final-0"></div></div>
 
-      <div class="quiz-question" data-q="1"><div class="question-num">Frage 2 von 20</div><div class="question-text">Was ist ein Inode unter Linux?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',1,'A')"><span class="option-letter">A</span> Ein Netzwerk-Interface</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'B')"><span class="option-letter">B</span> Ein Metadaten-Eintrag der alle Informationen &uuml;ber eine Datei speichert</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'C')"><span class="option-letter">C</span> Ein Benutzer-Account</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'D')"><span class="option-letter">D</span> Ein Verzeichnistyp</button></div><div class="quiz-feedback" id="fb-final-1"></div></div>
+      <div class="quiz-question" data-q="1"><div class="question-num">Frage 2 von 20</div><div class="question-text">Was ist ein Inode unter Linux?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',1,'A')"><span class="option-letter">A</span> Eine Art Netzwerk-Schnittstelle</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'B')"><span class="option-letter">B</span> Ein Eintrag mit allen Metadaten einer Datei</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'C')"><span class="option-letter">C</span> Ein angelegter Benutzer-Account</button><button class="quiz-option" onclick="selectOpt(this,'final',1,'D')"><span class="option-letter">D</span> Ein spezieller Verzeichnistyp</button></div><div class="quiz-feedback" id="fb-final-1"></div></div>
 
       <div class="quiz-question" data-q="2"><div class="question-num">Frage 3 von 20</div><div class="question-text">Welches Dateisystem hat eine maximale Dateigr&ouml;&szlig;e von 4 GB?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',2,'A')"><span class="option-letter">A</span> NTFS</button><button class="quiz-option" onclick="selectOpt(this,'final',2,'B')"><span class="option-letter">B</span> FAT32</button><button class="quiz-option" onclick="selectOpt(this,'final',2,'C')"><span class="option-letter">C</span> ext4</button><button class="quiz-option" onclick="selectOpt(this,'final',2,'D')"><span class="option-letter">D</span> exFAT</button></div><div class="quiz-feedback" id="fb-final-2"></div></div>
 
       <div class="quiz-question" data-q="3"><div class="question-num">Frage 4 von 20</div><div class="question-text">Wof&uuml;r steht das 0x-Pr&auml;fix vor einer Zahl?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',3,'A')"><span class="option-letter">A</span> Die Zahl ist negativ</button><button class="quiz-option" onclick="selectOpt(this,'final',3,'B')"><span class="option-letter">B</span> Die Zahl ist oktal</button><button class="quiz-option" onclick="selectOpt(this,'final',3,'C')"><span class="option-letter">C</span> Die Zahl ist hexadezimal</button><button class="quiz-option" onclick="selectOpt(this,'final',3,'D')"><span class="option-letter">D</span> Die Zahl ist bin&auml;r</button></div><div class="quiz-feedback" id="fb-final-3"></div></div>
 
-      <div class="quiz-question" data-q="4"><div class="question-num">Frage 5 von 20</div><div class="question-text">Was sind Magic Bytes?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',4,'A')"><span class="option-letter">A</span> Zuf&auml;llige Bytes am Dateiende</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'B')"><span class="option-letter">B</span> Verschl&uuml;sselungsschl&uuml;ssel</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'C')"><span class="option-letter">C</span> Eine eindeutige Byte-Signatur am Dateianfang die den Dateityp identifiziert</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'D')"><span class="option-letter">D</span> Die Dateiendung in Bin&auml;rform</button></div><div class="quiz-feedback" id="fb-final-4"></div></div>
+      <div class="quiz-question" data-q="4"><div class="question-num">Frage 5 von 20</div><div class="question-text">Was sind Magic Bytes?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',4,'A')"><span class="option-letter">A</span> Zuf&auml;llig erzeugte Bytes ganz am Dateiende</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'B')"><span class="option-letter">B</span> Schl&uuml;ssel zum Entschl&uuml;sseln der Datei</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'C')"><span class="option-letter">C</span> Eine Byte-Signatur am Anfang, die den Typ verr&auml;t</button><button class="quiz-option" onclick="selectOpt(this,'final',4,'D')"><span class="option-letter">D</span> Die Dateiendung, bin&auml;r gespeichert</button></div><div class="quiz-feedback" id="fb-final-4"></div></div>
 
-      <div class="quiz-question" data-q="5"><div class="question-num">Frage 6 von 20</div><div class="question-text">Was bedeutet LF bei Zeilenenden?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',5,'A')"><span class="option-letter">A</span> Line Fix</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'B')"><span class="option-letter">B</span> Line Feed (Zeilenvorschub), Byte 0x0A, Linux-Standard</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'C')"><span class="option-letter">C</span> Last File</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'D')"><span class="option-letter">D</span> Byte 0x0D, Windows-Standard</button></div><div class="quiz-feedback" id="fb-final-5"></div></div>
+      <div class="quiz-question" data-q="5"><div class="question-num">Frage 6 von 20</div><div class="question-text">Was bedeutet LF bei Zeilenenden?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',5,'A')"><span class="option-letter">A</span> Line Fix, eine Fehlerkorrektur</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'B')"><span class="option-letter">B</span> Line Feed, Byte 0x0A, der Linux-Standard</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'C')"><span class="option-letter">C</span> Last File, der letzte Eintrag</button><button class="quiz-option" onclick="selectOpt(this,'final',5,'D')"><span class="option-letter">D</span> Byte 0x0D, ein reiner Windows-Standard</button></div><div class="quiz-feedback" id="fb-final-5"></div></div>
 
       <div class="quiz-question" data-q="6"><div class="question-num">Frage 7 von 20</div><div class="question-text">Welches Bildformat ist eine Vektorgrafik?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',6,'A')"><span class="option-letter">A</span> JPEG</button><button class="quiz-option" onclick="selectOpt(this,'final',6,'B')"><span class="option-letter">B</span> PNG</button><button class="quiz-option" onclick="selectOpt(this,'final',6,'C')"><span class="option-letter">C</span> GIF</button><button class="quiz-option" onclick="selectOpt(this,'final',6,'D')"><span class="option-letter">D</span> SVG</button></div><div class="quiz-feedback" id="fb-final-6"></div></div>
 
       <div class="quiz-question" data-q="7"><div class="question-num">Frage 8 von 20</div><div class="question-text">Was bedeutet chmod 755?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',7,'A')"><span class="option-letter">A</span> rwxrwxrwx</button><button class="quiz-option" onclick="selectOpt(this,'final',7,'B')"><span class="option-letter">B</span> rwxr-xr-x</button><button class="quiz-option" onclick="selectOpt(this,'final',7,'C')"><span class="option-letter">C</span> rw-r--r--</button><button class="quiz-option" onclick="selectOpt(this,'final',7,'D')"><span class="option-letter">D</span> rwx------</button></div><div class="quiz-feedback" id="fb-final-7"></div></div>
 
-      <div class="quiz-question" data-q="8"><div class="question-num">Frage 9 von 20</div><div class="question-text">Was ist Base64?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',8,'A')"><span class="option-letter">A</span> Verschl&uuml;sselung</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'B')"><span class="option-letter">B</span> Komprimierung</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'C')"><span class="option-letter">C</span> Kodierung von Bin&auml;rdaten in druckbare ASCII-Zeichen</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'D')"><span class="option-letter">D</span> Ein Archivformat</button></div><div class="quiz-feedback" id="fb-final-8"></div></div>
+      <div class="quiz-question" data-q="8"><div class="question-num">Frage 9 von 20</div><div class="question-text">Was ist Base64?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',8,'A')"><span class="option-letter">A</span> Ein Verschl&uuml;sselungsverfahren</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'B')"><span class="option-letter">B</span> Ein Komprimierungsverfahren</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'C')"><span class="option-letter">C</span> Bin&auml;rdaten als druckbare ASCII-Zeichen</button><button class="quiz-option" onclick="selectOpt(this,'final',8,'D')"><span class="option-letter">D</span> Ein g&auml;ngiges Archivformat</button></div><div class="quiz-feedback" id="fb-final-8"></div></div>
 
       <div class="quiz-question" data-q="9"><div class="question-num">Frage 10 von 20</div><div class="question-text">Welches Audioformat ist verlustfrei?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',9,'A')"><span class="option-letter">A</span> MP3</button><button class="quiz-option" onclick="selectOpt(this,'final',9,'B')"><span class="option-letter">B</span> AAC</button><button class="quiz-option" onclick="selectOpt(this,'final',9,'C')"><span class="option-letter">C</span> OGG</button><button class="quiz-option" onclick="selectOpt(this,'final',9,'D')"><span class="option-letter">D</span> FLAC</button></div><div class="quiz-feedback" id="fb-final-9"></div></div>
 
-      <div class="quiz-question" data-q="10"><div class="question-num">Frage 11 von 20</div><div class="question-text">Was ist Journaling in einem Dateisystem?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',10,'A')"><span class="option-letter">A</span> Automatisches Backup</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'B')"><span class="option-letter">B</span> Komprimierung von Metadaten</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'C')"><span class="option-letter">C</span> Aufzeichnen geplanter &Auml;nderungen vor der Ausf&uuml;hrung f&uuml;r Absturzwiederherstellung</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'D')"><span class="option-letter">D</span> Verschl&uuml;sselung von Dateien</button></div><div class="quiz-feedback" id="fb-final-10"></div></div>
+      <div class="quiz-question" data-q="10"><div class="question-num">Frage 11 von 20</div><div class="question-text">Was ist Journaling in einem Dateisystem?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',10,'A')"><span class="option-letter">A</span> Ein automatisch erstelltes Backup</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'B')"><span class="option-letter">B</span> Das Komprimieren der Metadaten</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'C')"><span class="option-letter">C</span> Geplante &Auml;nderungen vorab protokollieren</button><button class="quiz-option" onclick="selectOpt(this,'final',10,'D')"><span class="option-letter">D</span> Das Verschl&uuml;sseln einzelner Dateien</button></div><div class="quiz-feedback" id="fb-final-10"></div></div>
 
       <div class="quiz-question" data-q="11"><div class="question-num">Frage 12 von 20</div><div class="question-text">Wie viele Bytes ben&ouml;tigt ein Emoji (z.B. U+1F600) in UTF-8?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',11,'A')"><span class="option-letter">A</span> 1</button><button class="quiz-option" onclick="selectOpt(this,'final',11,'B')"><span class="option-letter">B</span> 2</button><button class="quiz-option" onclick="selectOpt(this,'final',11,'C')"><span class="option-letter">C</span> 3</button><button class="quiz-option" onclick="selectOpt(this,'final',11,'D')"><span class="option-letter">D</span> 4</button></div><div class="quiz-feedback" id="fb-final-11"></div></div>
 
@@ -3106,17 +3111,17 @@ showmount -e fileserver
 
       <div class="quiz-question" data-q="13"><div class="question-num">Frage 14 von 20</div><div class="question-text">Was ist ein .tar.gz?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',13,'A')"><span class="option-letter">A</span> Ein verschl&uuml;sseltes ZIP</button><button class="quiz-option" onclick="selectOpt(this,'final',13,'B')"><span class="option-letter">B</span> Ein TAR-Archiv komprimiert mit Gzip</button><button class="quiz-option" onclick="selectOpt(this,'final',13,'C')"><span class="option-letter">C</span> Ein Windows-Backup-Format</button><button class="quiz-option" onclick="selectOpt(this,'final',13,'D')"><span class="option-letter">D</span> Ein Videoformat</button></div><div class="quiz-feedback" id="fb-final-13"></div></div>
 
-      <div class="quiz-question" data-q="14"><div class="question-num">Frage 15 von 20</div><div class="question-text">Warum kann eine gel&ouml;schte Datei oft wiederhergestellt werden?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',14,'A')"><span class="option-letter">A</span> Windows speichert immer eine Kopie</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'B')"><span class="option-letter">B</span> Nur der Metadaten-Eintrag wird als frei markiert, Dateidaten bleiben bis zum &Uuml;berschreiben</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'C')"><span class="option-letter">C</span> Festplatten l&ouml;schen nie wirklich</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'D')"><span class="option-letter">D</span> Das Dateisystem verschl&uuml;sselt gel&ouml;schte Daten</button></div><div class="quiz-feedback" id="fb-final-14"></div></div>
+      <div class="quiz-question" data-q="14"><div class="question-num">Frage 15 von 20</div><div class="question-text">Warum kann eine gel&ouml;schte Datei oft wiederhergestellt werden?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',14,'A')"><span class="option-letter">A</span> Windows speichert vorher immer eine Kopie</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'B')"><span class="option-letter">B</span> Nur der Eintrag wird freigegeben, die Daten bleiben</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'C')"><span class="option-letter">C</span> Festplatten l&ouml;schen technisch nie wirklich</button><button class="quiz-option" onclick="selectOpt(this,'final',14,'D')"><span class="option-letter">D</span> Das Dateisystem verschl&uuml;sselt gel&ouml;schte Dateien</button></div><div class="quiz-feedback" id="fb-final-14"></div></div>
 
-      <div class="quiz-question" data-q="15"><div class="question-num">Frage 16 von 20</div><div class="question-text">Was macht <code style="font-family:'DM Mono',monospace">chmod 600</code>?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',15,'A')"><span class="option-letter">A</span> Alle d&uuml;rfen lesen</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'B')"><span class="option-letter">B</span> Nur Owner darf lesen und schreiben, alle anderen haben keinen Zugriff</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'C')"><span class="option-letter">C</span> Owner alles, Gruppe lesen</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'D')"><span class="option-letter">D</span> Datei wird versteckt</button></div><div class="quiz-feedback" id="fb-final-15"></div></div>
+      <div class="quiz-question" data-q="15"><div class="question-num">Frage 16 von 20</div><div class="question-text">Was macht <code style="font-family:'DM Mono',monospace">chmod 600</code>?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',15,'A')"><span class="option-letter">A</span> Alle Benutzer d&uuml;rfen die Datei lesen</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'B')"><span class="option-letter">B</span> Nur der Owner darf lesen und schreiben</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'C')"><span class="option-letter">C</span> Owner alles, die Gruppe darf lesen</button><button class="quiz-option" onclick="selectOpt(this,'final',15,'D')"><span class="option-letter">D</span> Die Datei wird damit versteckt</button></div><div class="quiz-feedback" id="fb-final-15"></div></div>
 
-      <div class="quiz-question" data-q="16"><div class="question-num">Frage 17 von 20</div><div class="question-text">Was ist verlustbehaftete Komprimierung?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',16,'A')"><span class="option-letter">A</span> Komprimierung die die Datei besch&auml;digt</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'B')"><span class="option-letter">B</span> Komprimierung bei der Informationen dauerhaft gel&ouml;scht werden um kleinere Dateien zu erzielen</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'C')"><span class="option-letter">C</span> Komprimierung die die Originaldatei exakt wiederherstellen kann</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'D')"><span class="option-letter">D</span> Nur bei Audiodateien m&ouml;glich</button></div><div class="quiz-feedback" id="fb-final-16"></div></div>
+      <div class="quiz-question" data-q="16"><div class="question-num">Frage 17 von 20</div><div class="question-text">Was ist verlustbehaftete Komprimierung?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',16,'A')"><span class="option-letter">A</span> Komprimierung, die die Datei dabei besch&auml;digt</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'B')"><span class="option-letter">B</span> Komprimierung, die Details dauerhaft wegl&auml;sst</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'C')"><span class="option-letter">C</span> Komprimierung, die das Original exakt zur&uuml;ckgibt</button><button class="quiz-option" onclick="selectOpt(this,'final',16,'D')"><span class="option-letter">D</span> Sie ist nur bei Audiodateien m&ouml;glich</button></div><div class="quiz-feedback" id="fb-final-16"></div></div>
 
-      <div class="quiz-question" data-q="17"><div class="question-num">Frage 18 von 20</div><div class="question-text">Warum ist UTF-8 r&uuml;ckw&auml;rtskompatibel mit ASCII?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',17,'A')"><span class="option-letter">A</span> Weil UTF-8 nur 7 Bit nutzt</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'B')"><span class="option-letter">B</span> Weil ASCII-Zeichen (0-127) in UTF-8 identisch mit einem Byte kodiert werden</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'C')"><span class="option-letter">C</span> Weil beide von Microsoft entwickelt wurden</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'D')"><span class="option-letter">D</span> Weil UTF-8 alle ASCII-Dateien automatisch konvertiert</button></div><div class="quiz-feedback" id="fb-final-17"></div></div>
+      <div class="quiz-question" data-q="17"><div class="question-num">Frage 18 von 20</div><div class="question-text">Warum ist UTF-8 r&uuml;ckw&auml;rtskompatibel mit ASCII?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',17,'A')"><span class="option-letter">A</span> Weil UTF-8 grunds&auml;tzlich nur 7 Bit nutzt</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'B')"><span class="option-letter">B</span> Weil ASCII-Zeichen in UTF-8 gleich kodiert sind</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'C')"><span class="option-letter">C</span> Weil beide gemeinsam von Microsoft stammen</button><button class="quiz-option" onclick="selectOpt(this,'final',17,'D')"><span class="option-letter">D</span> Weil UTF-8 ASCII-Dateien automatisch umwandelt</button></div><div class="quiz-feedback" id="fb-final-17"></div></div>
 
-      <div class="quiz-question" data-q="18"><div class="question-num">Frage 19 von 20</div><div class="question-text">Was ist ACL (Access Control List)?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',18,'A')"><span class="option-letter">A</span> Ein Linux-Befehl zum Setzen von Berechtigungen</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'B')"><span class="option-letter">B</span> Ein Windows-Dateisystem</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'C')"><span class="option-letter">C</span> Eine Liste von Berechtigungseintr&auml;gen pro Benutzer/Gruppe mit feingranularen Rechten</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'D')"><span class="option-letter">D</span> Ein Netzwerkprotokoll</button></div><div class="quiz-feedback" id="fb-final-18"></div></div>
+      <div class="quiz-question" data-q="18"><div class="question-num">Frage 19 von 20</div><div class="question-text">Was ist ACL (Access Control List)?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',18,'A')"><span class="option-letter">A</span> Ein Linux-Befehl, der Berechtigungen setzt</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'B')"><span class="option-letter">B</span> Ein eigenes Windows-Dateisystem</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'C')"><span class="option-letter">C</span> Eine Liste feingranularer Rechte je Benutzer</button><button class="quiz-option" onclick="selectOpt(this,'final',18,'D')"><span class="option-letter">D</span> Ein spezielles Netzwerkprotokoll</button></div><div class="quiz-feedback" id="fb-final-18"></div></div>
 
-      <div class="quiz-question" data-q="19"><div class="question-num">Frage 20 von 20</div><div class="question-text">Eine .docx-Datei hat dieselben Magic Bytes wie eine ZIP-Datei. Was bedeutet das?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',19,'A')"><span class="option-letter">A</span> Die Datei ist besch&auml;digt</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'B')"><span class="option-letter">B</span> Eine .docx-Datei ist intern ein ZIP-Archiv mit XML-Dateien</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'C')"><span class="option-letter">C</span> Zufall</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'D')"><span class="option-letter">D</span> ZIP und DOCX sind dasselbe Format</button></div><div class="quiz-feedback" id="fb-final-19"></div></div>
+      <div class="quiz-question" data-q="19"><div class="question-num">Frage 20 von 20</div><div class="question-text">Eine .docx-Datei hat dieselben Magic Bytes wie eine ZIP-Datei. Was bedeutet das?</div><div class="quiz-options"><button class="quiz-option" onclick="selectOpt(this,'final',19,'A')"><span class="option-letter">A</span> Die docx-Datei ist besch&auml;digt</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'B')"><span class="option-letter">B</span> Eine .docx ist intern ein ZIP mit XML</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'C')"><span class="option-letter">C</span> Reiner Zufall</button><button class="quiz-option" onclick="selectOpt(this,'final',19,'D')"><span class="option-letter">D</span> ZIP und DOCX sind dasselbe Dateiformat</button></div><div class="quiz-feedback" id="fb-final-19"></div></div>
 
       <div class="quiz-result" id="result-final">
         <div class="result-score" id="result-score-final"></div>
@@ -3704,9 +3709,9 @@ QUIZ_DATA.m8 = {
     { correct: "Richtig. _netdev weist das System an, dieses Dateisystem erst zu mounten nachdem das Netzwerk verf\u00fcgbar ist. Ohne diese Option k\u00f6nnte das System beim Booten h\u00e4ngen weil es versucht eine Netzwerkfreigabe zu mounten bevor das Netzwerk bereit ist.",
       wrong: "Falsch. _netdev hat nichts mit Benutzern, Verschl\u00fcsselung oder Druckern zu tun. Es steuert ausschlie\u00dflich den Zeitpunkt des Mountens: erst nach Netzwerkverf\u00fcgbarkeit." },
     { correct: "Richtig. iSCSI ist Block-Storage: der Client bekommt rohe, nummerierte Bl\u00f6cke und legt das Dateisystem selbst an. SMB und NFS sind File-Storage und liefern fertige Dateien.",
-      wrong: "Falsch. iSCSI braucht ein Netzwerk (es l\u00e4uft \u00fcber TCP/IP, Port 3260) und ist gerade kein Client-Thema, sondern f\u00fcr Server. Auf der \u00fcbertragenen Platte wird sehr wohl ein Dateisystem angelegt, nur vom Client. Der echte Unterschied ist die Ebene: Bl\u00f6cke statt Dateien." },
+      wrong: "Falsch. iSCSI l\u00e4uft \u00fcber IP (Port 3260), braucht also sehr wohl ein Netzwerk, und ist ein Server-Thema, nicht f\u00fcr Arbeitsplatz-Clients. Der Client sieht am Ende eine ganz normale lokale Festplatte. Der echte Unterschied ist die Ebene: Bl\u00f6cke statt Dateien." },
     { correct: "Richtig. iSCSI ist ein Protokoll, mit dem man ein SAN aufbaut. iSCSI ist das 'Wie' (die Technik), SAN das 'Was' (die Architektur). Sie sind keine Konkurrenten.",
-      wrong: "Falsch. iSCSI und SAN sind weder dasselbe noch ein Ersatz f\u00fcreinander. SAN ist die Architektur, iSCSI eines der Protokolle, mit denen man sie umsetzt (neben Fibre Channel)." }
+      wrong: "Falsch. iSCSI und SAN sind weder dasselbe noch ein Ersatz f\u00fcreinander, und hinter iSCSI muss kein gro\u00dfes SAN stecken (auch ein einzelner Server oder ein NAS kann es nutzen). SAN ist die Architektur, iSCSI eines der Protokolle daf\u00fcr." }
   ]
 };
 
